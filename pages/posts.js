@@ -23,7 +23,7 @@ const posts = () => {
         type={type}
         placeholder={placeholder}
       />
-      {errors[label] && <span>mandatory</span>}
+      {errors[label] && <span>Requerido</span>}
     </div>
   );
 
