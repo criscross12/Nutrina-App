@@ -5,18 +5,21 @@ import React, { useState, useMemo } from "react";
 import {
   ArticleIcon,
   CollapsIcon,
-  HomeIcon,
+  CalendarIcon,
   LogoIcon,
   LogoutIcon,
   UsersIcon,
-  VideosIcon,
+  HelpIcon,
+  Report,
+  Configuration,
 } from "./icons";
 
 const menuItems = [
-  { id: 1, label: "Home", icon: HomeIcon, link: "/" },
-  { id: 2, label: "Manage Posts", icon: ArticleIcon, link: "/posts" },
-  { id: 3, label: "Manage Users", icon: UsersIcon, link: "/users" },
-  { id: 4, label: "Manage Tutorials", icon: VideosIcon, link: "/tutorials" },
+  { id: 1, label: "Paciente", icon: UsersIcon, link: "/" },
+  { id: 2, label: "Agenda", icon: CalendarIcon, link: "/posts" },
+  { id: 3, label: "Reportes", icon: Report, link: "/users" },
+  { id: 4, label: "Configuracion", icon: Configuration, link: "/tutorials" },
+  { id: 5, label: "Ayuda", icon: HelpIcon, link: "/" },
 ];
 
 const Sidebar = () => {
@@ -122,7 +125,7 @@ const Sidebar = () => {
           </div>
           {!toggleCollapse && (
             <span className={classNames("text-md font-medium text-text-light")}>
-              Logout
+              Perfil
             </span>
           )}
         </div>
