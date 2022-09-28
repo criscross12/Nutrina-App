@@ -31,12 +31,24 @@ const posts = () => {
   const PersonFields = () => (
     <section className={styles.inputGroup}>
       <h3>Datos Generales del paciente</h3>
-      <Input
+      <Input 
         label="Nombre completo"
         required
         type="text"
         placeholder="Ex: Maria Leopoldina de Habsburgo"
       />
+      <Input
+        label="Apellido Paterno"
+        required
+        type="text"
+        placeholder="Ejem: Leopoldina"
+      />   
+      <Input
+        label="Apellido Materno"
+        required
+        type="text"
+        placeholder="Ejem: de Habsburgo"
+      />   
       <Input
         label="Fecha de Nacimiento"
         required
@@ -139,7 +151,8 @@ const posts = () => {
   return (
     <Layout>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <h2>User Register</h2>
+        <h2>Registro de Pacientes</h2>
+        <img src="nutrina1.png" class="absolute right-0 top-0 w-22 h-24"></img>
         {fieldGroups[step]}
         <Navigation />
         <Reference />
