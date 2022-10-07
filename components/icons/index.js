@@ -10,4 +10,5 @@ export { default as Configuration } from "./Configuration";
 export { default as Phone } from "./Phone";
 export { default as Ubication } from "./Ubication";
 export { default as Email } from "./Email";
-export { default as Dashbord } from "./Dashbord";
+export { default as Men } from "./Men";
+export { default as Cart } from "./Cart";
