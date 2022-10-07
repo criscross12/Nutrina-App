@@ -23,7 +23,11 @@ export default function Navbar(){
                     <div className="relative mx-0 flex h-16 items-center justify-between md:mx-20">
                         <div className="absolute inset-y-0 flex items-center sm:hidden">
                             {/**mobile menu btn */}
+<<<<<<< HEAD
                             <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-orange-500 hover:bg-orange-500 hover:text-white focus:outline-none focus:right-2 focus:ring-inset focus:right-white">
+=======
+                            <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-sky-500 hover:bg-sky-500 hover:text-white focus:outline-none focus:right-2 focus:ring-inset focus:right-white">
+>>>>>>> b97b12f (actualizacion-form)
                                 <span className="sr-only">open main menu</span>
                                 {open ? <GrFormClose className="block h-6 w-6" aria-hidden="true"/> : <GiHamburgerMenu className="block h-6 w-6" aria-hidden="true"/>}
                             </Disclosure.Button>
@@ -40,7 +44,11 @@ export default function Navbar(){
                                         <a 
                                         href={item.href} 
                                         key={item.name} 
+<<<<<<< HEAD
                                         className={classNames( item.current ? "bg-orange-500 text-white shadow-lg" : "text-gray-500 hover:bg-orange-500 hover:text-white hover:shadow-lg", "rounded-full px-3 py-2 text-sm font-medium")}
+=======
+                                        className={classNames( item.current ? "bg-sky-500 text-white shadow-lg" : "text-gray-500 hover:bg-sky-500 hover:text-white hover:shadow-lg", "rounded-full px-3 py-2 text-sm font-medium")}
+>>>>>>> b97b12f (actualizacion-form)
                                         aria-current={item.current ? "page" : undefined}
                                         >
                                         {" "}
@@ -51,7 +59,11 @@ export default function Navbar(){
                             </div>
                         </div>
                         <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+<<<<<<< HEAD
                             <Link href={"login"}><button className="rounded-full border-orange-100 px-3 py-2 text-sm font-medium text-orange-500 hover:bg-orange-500 hover:text-white hover:shadow-lg">
+=======
+                            <Link href={"login"}><button className="rounded-full border-orange-100 px-3 py-2 text-sm font-medium text-gray-400 hover:bg-sky-500 hover:text-white hover:shadow-lg">
+>>>>>>> b97b12f (actualizacion-form)
                                 Iniciar sesión
                             </button></Link>
                         </div>
