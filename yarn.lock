@@ -98,10 +98,10 @@
     "@fullcalendar/daygrid" "~5.11.2"
     "tslib" "^2.1.0"
 
-"@headlessui/react@^1.7.2":
-  "integrity" "sha512-snLv2lxwsf2HNTOBNgHYdvoYZ3ChJE8QszPi1d/hl9js8KrFrUulTaQBfSyPbJP5BybVreWh9DxCgz9S0Z6hKQ=="
-  "resolved" "https://registry.npmjs.org/@headlessui/react/-/react-1.7.2.tgz"
-  "version" "1.7.2"
+"@headlessui/react@^1.7.3":
+  "integrity" "sha512-LGp06SrGv7BMaIQlTs8s2G06moqkI0cb0b8stgq7KZ3xcHdH3qMP+cRyV7qe5x4XEW/IGY48BW4fLesD6NQLng=="
+  "resolved" "https://registry.npmjs.org/@headlessui/react/-/react-1.7.3.tgz"
+  "version" "1.7.3"
 
 "@humanwhocodes/config-array@^0.10.4":
   "integrity" "sha512-mXAIHxZT3Vcpg83opl1wGlVZ9xydbfZO3r5YfRSH6Gpp2J/PfdBP0wbDa2sO6/qRbcalpoevVyW6A/fI6LfeMw=="

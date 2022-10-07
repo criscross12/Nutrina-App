@@ -1,31 +1,29 @@
 import Image from "next/image"
-import Link from "next/link"
+import React from "react"
+import {BsFillPlayCircleFill} from "react-icons/bs"
+
 
 export default function section1(){
     return(
-        <section className="py-16 hero" width="100px" height="100hv">
-            <div className="container mx-auto md:px-20">
-             
-
-            {Slide()}
-            </div>
-        </section>
-    )
-}
-
-function Slide(){
-    return(
-        <div className="grid md:grid-cols-2">
-            <div className="info">
-                <div className="title">
-                    <Link href={"/"}><a className="text-1xl md:text-3xl text-black hover:text-white">El valor es como el amor,</a></Link>
-                    <Link href={"/"}><a className="text-3xl md:text-6xl text-black font-bold hover:text-white"> Debe tener esperanza para su nutrición</a></Link>
-                    <p className="text-2xl md:text-1xl text-black hover:text-white py-4">la primera riqueza es la salud</p>
-                    
+        <div className="hero flex md:flex-row flex-col justify-around items-center min-w-7xl">
+            {/**textual area */}
+            <div className="flex flex-col items-start md:ml-20 mx-10 mt-10 md:mt-0">
+                <p className="text-orange-500">
+                    El valor es como el amor,
+                </p>
+                <h2 className="font-bold md:text-6xl text-5xl text-gray-800">
+                    Debe tener esperanza para su nutrición.
+                </h2>
+                <p className="md:text-base teat-sm font-semibold text-gray-400 mt-5">
+                    La primera riqueza es la salud.
+                </p>
+                <div className="mt-10 flex justify-center items-center gap-5">
+                    <button className="text-white bg-orange-500 font-semibold rounded-full px-5 md:py-4 hover:bg-black hover:shadow-lg">Agendar cita</button>
                 </div>
             </div>
-            <div className="image">
-              <Image src={"/images/imagen.png"} width={700} height={500}></Image>
+            {/**image area */}
+            <div className="mr-20 md:block hidden">
+                <Image src={"/images/imagen.png"} width={1500} height={1000}/>
             </div>
         </div>
     )

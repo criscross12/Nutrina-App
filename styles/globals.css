@@ -22,5 +22,8 @@ a {
   @apply text-black block p-0 font-bold hover:text-yellow-500
 }
 .hero{
-  @apply bg-gradient-to-t from-sky-400 to-sky-200
+  @apply bg-gradient-to-t from-sky-400 to-sky-50
+}
+.cards{
+  @apply rounded overflow-hidden shadow-lg bg-gradient-to-b from-cyan-200
 }
