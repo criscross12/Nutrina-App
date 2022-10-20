@@ -1,9 +1,21 @@
+import FullCalendar from "@fullcalendar/react";
+import interactionPlugin from "@fullcalendar/interaction";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import { useRef } from "react";
 import Layout from "../components/layout";
 
-export default function Home() {
+const Calendar = () => {
+  const calendarRef = useRef(null);
   return (
-    <Layout title="Welcome">
-      <h1>Hola</h1>
+    <Layout>
+      <FullCalendar
+        innerRef={calendarRef}
+        plugins={[timeGridPlugin, interactionPlugin]}
+        editable
+        selectable
+      />
     </Layout>
   );
-}
+};
+
+export default Calendar;
