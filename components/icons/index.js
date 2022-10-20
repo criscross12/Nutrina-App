@@ -9,10 +9,5 @@ export { default as Report } from "./Report";
 export { default as Configuration } from "./Configuration";
 export { default as Phone } from "./Phone";
 export { default as Ubication } from "./Ubication";
-<<<<<<< HEAD
 export { default as Email } from "./Email";
-=======
-export { default as Email } from "./Email";
-export { default as Men } from "./Men";
-export { default as Cart } from "./Cart";
->>>>>>> b97b12f (actualizacion-form)
+export { default as Dashbord } from "./Dashbord";

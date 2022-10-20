@@ -1,3 +1,6 @@
+import "@fullcalendar/common/main.css";
+import "@fullcalendar/daygrid/main.css";
+import "@fullcalendar/timegrid/main.css";
 import "../styles/globals.css";
 import "@fortawesome/fontawesome-svg-core/styles.css"; // import Font Awesome CSS
 import { config } from "@fortawesome/fontawesome-svg-core";
