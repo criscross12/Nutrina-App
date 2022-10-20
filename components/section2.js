@@ -12,12 +12,6 @@ export default function section2(){
           <div className="grid md:grid-cols-3 grid-cols-1 gap-y-5">
             {/**first block */}
             <div className="flex flex-wrap justify-center">
-<<<<<<< HEAD
-              <div className="w-full px-4">
-                <div className="hero border-gray-500 rounded-md p-10">
-                <Image src={"/images/foto1.png"} width={1500} height={1500}/>
-                  <span className="text-primary font-semibold text-lg block mb-4">Lite</span>
-=======
               <div className="w-full px-4 font-mono">
                 <div className="hero border-gray-500 rounded-md p-10">
                 <Image src={"/images/nutrina1.png"} width={700} height={500}/>
@@ -26,18 +20,12 @@ export default function section2(){
                   <h1>•Valoración del Estado Nutricional</h1>
                   <h1>•Horientacion alimentaria</h1>
                   <h1>•Plan de alimentacion personalizado, en base a tus necesidades, presupuesto, preferencias y horarios.</h1>
->>>>>>> b97b12f (actualizacion-form)
                 </div>
               </div>
             </div>
             {/**second block */}
             <div className="flex flex-wrap justify-center">
               <div className="w-full px-4">
-<<<<<<< HEAD
-                <div className="hero border-gray-500 rounded-md p-10">
-                <Image src={"/images/imagen2.png"} width={1500} height={1500}/>
-                  <span className="text-primary font-semibold text-lg block mb-4">Lite</span>
-=======
                 <div className="hero border-gray-500 rounded-md p-10 font-mono">
                 <Image src={"/images/ima.png"} width={3400} height={1650}/>
                   <span className="text-primary font-semibold text-lg block mb-4">Servicios</span>
@@ -73,7 +61,6 @@ export default function section2(){
     </tr>
   </tbody>
 </table>
->>>>>>> b97b12f (actualizacion-form)
                 </div>
               </div>
             </div>

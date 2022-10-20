@@ -18,11 +18,7 @@ export default function section1(){
                     La primera riqueza es la salud.
                 </p>
                 <div className="mt-10 flex justify-center items-center gap-5">
-<<<<<<< HEAD
-                    <button className="text-white bg-orange-500 font-semibold rounded-full px-5 md:py-4 hover:bg-black hover:shadow-lg">Agendar cita</button>
-=======
                     <button className="text-white bg-green-500 font-semibold rounded-full px-5 md:py-4 hover:bg-black hover:shadow-lg">Agendar cita</button>
->>>>>>> b97b12f (actualizacion-form)
                 </div>
             </div>
             {/**image area */}

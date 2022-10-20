@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import Head from "next/head"
 
 export default function Login({ children, title }){
@@ -16,12 +15,5 @@ export default function Login({ children, title }){
             </div>
             </main>
         </div>
-=======
-import Log from "../components/log"
-
-export default function Login(){
-    return(
-       <Log></Log>
->>>>>>> b97b12f (actualizacion-form)
     )
 }
