@@ -12,3 +12,4 @@ export { default as Ubication } from "./Ubication";
 export { default as Email } from "./Email";
 export { default as Men } from "./Men";
 export { default as Cart } from "./Cart";
+export { default as Dashbord } from "./Dashbord";

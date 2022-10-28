@@ -88,7 +88,7 @@ export default function patients({ data }) {
 
 export async function getStaticProps() {
   try {
-    const res = await fetch("http://localhost:5000/patients");
+    const res = await fetch("https://dev-api-nutrina.byecond.com/patients");
     const data = await res.json();
     return {
       props: {
