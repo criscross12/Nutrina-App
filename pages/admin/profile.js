@@ -1,22 +1,28 @@
 import Link from "next/link";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../../components/Sidebar";
 
 export default function Home() {
-    return (
-      <div className="h-screen flex flex-row justify-start hero"><Sidebar />
-      
+  return (
+    <div className="h-screen flex flex-row justify-start hero">
+      <Sidebar />
+
       <div class="mx-auto container max-w-1xl md:w-3/4 shadow-md -space-y-4">
         <div class=" border-t-2 rounded-t ">
-              <img
-                class=" container  rounded-t  h-36"
-                alt="User avatar"
-                src="portada.jpg"
-              />
-              
+          <img
+            class=" container  rounded-t  h-36"
+            alt="User avatar"
+            src="../portada.jpg"
+          />
         </div>
         <div class="mb-2">
-                            <img class=" -mt-8 inline-flex rounded-full" src="perfil.jpg" width="64" height="64" alt="User" />
-                        </div>
+          <img
+            class=" -mt-8 inline-flex rounded-full"
+            src="../perfil.jpg"
+            width="64"
+            height="64"
+            alt="User"
+          />
+        </div>
         <div class="bg-white space-y-6">
           <div class="md:inline-flex space-y-4 md:space-y-0 w-full p-4 text-gray-500 items-center">
             <h2 class="md:w-1/3 max-w-sm mx-auto">Cuenta</h2>
@@ -149,29 +155,29 @@ export default function Home() {
                 Actualizar
               </button>
             </div>
-            
           </div>
 
           <div class="w-full p-0 text-right text-gray-500">
-            <Link href={"/initial"}><button class="inline-flex items-center focus:outline-none mr-4">
-            <svg 
-            class="h-8 w-8 text-gray-500"  
-            viewBox="0 0 24 24"  
-            fill="none"  
-            stroke="currentColor"  
-            stroke-width="2"  
-            stroke-linecap="round"  
-            stroke-linejoin="round">  
-            <path 
-            d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />  
-            <polyline 
-            points="10 17 15 12 10 7" />  
-            <line x1="15" y1="12" x2="3" y2="12" />
-            </svg>
-            </button></Link>
+            <Link href={"/initial"}>
+              <button class="inline-flex items-center focus:outline-none mr-4">
+                <svg
+                  class="h-8 w-8 text-gray-500"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                  <polyline points="10 17 15 12 10 7" />
+                  <line x1="15" y1="12" x2="3" y2="12" />
+                </svg>
+              </button>
+            </Link>
           </div>
         </div>
       </div>
-</div>
-    );
-  }
+    </div>
+  );
+}
