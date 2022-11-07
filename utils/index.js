@@ -1,6 +1,19 @@
-export const datahelp = (data, patient) => {
+export const datahelp = (data) => {
   const user_uuid = "";
-  let patient_uuid = patient["uuid"];
+  const patient_uuid = "";
+
+  const data_patient = {
+    name: data["name"],
+    first_name: data["first_name"],
+    second_name: data["second_name"],
+    date_of_birth: data["date_of_birth"],
+    email: data["email"],
+    ocupation: data["ocupation"],
+    phone: data["phone"],
+    reason: data["reason"],
+    sex: data["sex"],
+  };
+
   const basic_measurements = {
     weight: data["weight"],
     height: data["height"],
@@ -27,22 +40,17 @@ export const datahelp = (data, patient) => {
     pl_abdominal: data["pl_abdominal"],
     pl_thigh: data["pl_thigh"],
     pl_leg: data["pl_leg"],
-    pr_relaxed_arm: data["pr_relaxed_arm"],
-    pr_flexed_arm: data["pr_flexed_arm"],
-    pr_mid_thigh: data["pr_mid_thigh"],
-    pr_leg: data["pr_leg"],
   };
   const bone_diameters = {
     D_bistyloid: data["D_bistyloid"],
     D_humerus: data["D_humerus"],
     D_femur: data["D_femur"],
-    D_humeral: data["D_humeral"],
-    D_femoral: data["D_femoral"],
   };
   const circumferences = {
     c_relaxed_arm: data["c_relaxed_arm"],
     c_contracted_arm: data["c_contracted_arm"],
     c_leg_max: data["c_leg_max"],
+    c_mid_thigh: data["c_mid_thigh"],
   };
   const energy_distribution = {
     kcalCarboHydrates: data["kcalCarboHydrates"],
@@ -53,6 +61,7 @@ export const datahelp = (data, patient) => {
   const dataResponse = {
     user_uuid,
     patient_uuid,
+    data_patient,
     basic_measurements,
     body_measurements,
     vital_signs,
@@ -62,19 +71,4 @@ export const datahelp = (data, patient) => {
     plyometric_measurements,
   };
   return dataResponse;
-};
-
-export const dataUser = (data) => {
-  const user = {
-    name: data["name"],
-    first_name: data["first_name"],
-    second_name: data["second_name"],
-    date_of_birth: data["date_of_birth"],
-    email: data["email"],
-    ocupation: data["ocupation"],
-    phone: data["phone"],
-    reason: data["reason"],
-    sex: data["sex"],
-  };
-  return user;
 };

@@ -1,11 +1,13 @@
 import React from "react";
 import { Textarea } from "@nextui-org/react";
-import Layout from "../components/layout";
+import Layout from "../../components/layout";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import styles from "../styles/Home.module.css";
-import { datahelp, dataUser } from "../utils/index";
+import styles from "../../styles/Home.module.css";
+import { datahelp } from "../../utils/index";
 import { useRouter } from "next/router";
+import Swal from "sweetalert2";
+import { NUTRINA_API } from "../../utils/config";
 
 const posts = () => {
   const { push } = useRouter();
@@ -16,29 +18,26 @@ const posts = () => {
   } = useForm({ mode: "all" });
 
   const onSubmit = async (data) => {
-    const user = await fetch("http://localhost:5000/patients", {
-      method: "POST",
-      body: JSON.stringify(dataUser(data)),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    data;
-    const resUser = await user.json();
-    console.log("User: ", resUser["uuid"]);
     const response = await fetch(
-      "http://localhost:5000/medical-consultation/medical-consultation",
+      NUTRINA_API.apiNutrina + "/medical-consultation/medical-consultation",
       {
         method: "POST",
-        body: JSON.stringify(datahelp(data, resUser)),
+        body: JSON.stringify(datahelp(data)),
         headers: {
           "Content-Type": "application/json",
         },
       }
     );
     const res = await response.json();
+    Swal.fire({
+      position: "top-start",
+      icon: "success",
+      title: "Your work has been saved",
+      showConfirmButton: false,
+      timer: 1500,
+    });
     console.log(res);
-    push("/finalConsultation");
+    push("/admin/finalConsultation");
   };
 
   /** Input field component */
@@ -118,13 +117,14 @@ const posts = () => {
           type="text"
           placeholder="Ejem: *******"
         />
-        <Input
-          name="sex"
-          label="Sexo:"
-          required
-          type="text"
-          placeholder="Ejem: Masculino"
-        />
+        <select
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          {...register("sex", { required: true })}
+        >
+          <option value="">Sexo...</option>
+          <option value="M">Masculino</option>
+          <option value="F">Femenino</option>
+        </select>
       </div>
     </section>
   );
@@ -288,34 +288,6 @@ const posts = () => {
           type="number"
           placeholder="##"
         />
-        <Input
-          name="pr_relaxed_arm"
-          label="PR Brazo relajado:"
-          required
-          type="number"
-          placeholder="##"
-        />
-        <Input
-          name="pr_flexed_arm"
-          label="PR Brazo flexionado:"
-          required
-          type="number"
-          placeholder="##"
-        />
-        <Input
-          name="pr_mid_thigh"
-          label="PR Muslo medio:"
-          required
-          type="number"
-          placeholder="##"
-        />
-        <Input
-          name="pr_leg"
-          label="PR Pierna:"
-          required
-          type="number"
-          placeholder="##"
-        />
       </div>
     </section>
   );
@@ -323,17 +295,17 @@ const posts = () => {
   const BoneDiametersFields = () => (
     <section className={styles.inputGroup}>
       <h3>Diametros óseos</h3>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-2">
+      <div className="">
         <Input
           name="D_bistyloid"
-          label="D.Biestiloideo:"
+          label="D.Biestiloideo :"
           required
           type="number"
           placeholder="##"
         />
         <Input
           name="D_humerus"
-          label="B.Húmero:"
+          label="D.Húmero:"
           required
           type="number"
           placeholder="##"
@@ -341,22 +313,6 @@ const posts = () => {
         <Input
           name="D_femur"
           label="D.Fémur:"
-          required
-          type="number"
-          placeholder="##"
-        />
-
-        <Input
-          name="D_humeral"
-          label="D.Humeral:"
-          required
-          type="number"
-          placeholder="##"
-        />
-
-        <Input
-          name="D_femoral"
-          label="D.Femoral:"
           required
           type="number"
           placeholder="##"
@@ -385,7 +341,14 @@ const posts = () => {
         />
         <Input
           name="c_leg_max"
-          label="Pierna Max:"
+          label="Pierna Máxima:"
+          required
+          type="number"
+          placeholder="##"
+        />
+        <Input
+          name="c_mid_thigh"
+          label="Muslo medio:"
           required
           type="number"
           placeholder="##"
@@ -435,7 +398,7 @@ const posts = () => {
           cols="150"
           name="note"
           bordered
-          color="success"
+          color="primary"
           labelPlaceholder="Agregar notas"
         />
       </div>
@@ -463,7 +426,7 @@ const posts = () => {
         <button
           type="button"
           className={styles.nextButton}
-          disabled={!isValid}
+          // disabled={!isValid}
           onClick={() => {
             setStep(step + 1);
           }}
@@ -518,7 +481,10 @@ const posts = () => {
     <Layout title={"Consulta"}>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <h2>Registro de Pacientes</h2>
-        <img src="nutrina1.png" class="absolute right-0 top-0 w-22 h-24"></img>
+        <img
+          src="../nutrina1.png"
+          class="absolute right-0 top-0 w-22 h-24"
+        ></img>
         {fieldGroups[step]}
         <Navigation />
         <Reference />

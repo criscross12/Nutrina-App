@@ -15,10 +15,11 @@ import {
 } from "./icons";
 
 const menuItems = [
-  { id: 1, label: "Paciente", icon: UsersIcon, link: "/patients" },
-  { id: 2, label: "Agenda", icon: CalendarIcon, link: "/consultation" },
-  { id: 3, label: "Reportes", icon: Report, link: "/users" },
-  { id: 4, label: "Dashbord", icon: Dashbord, link: "/dashbord" },
+  { id: 1, label: "Paciente", icon: UsersIcon, link: "/admin/patients" },
+  { id: 2, label: "Agenda", icon: CalendarIcon, link: "/admin/consultation" },
+  { id: 3, label: "Reportes", icon: Report, link: "/admin/users" },
+  { id: 4, label: "Dashbord", icon: Dashbord, link: "/admin/dashbord" },
+  { id: 5, label: "Perfil", icon: LogoutIcon, link: "/admin/profile" },
   { id: 5, label: "Ayuda", icon: HelpIcon, link: "/" },
 ];
 
@@ -34,9 +35,9 @@ const Sidebar = () => {
   );
 
   const wrapperClasses = classNames(
-    "h-screen sticky top-0 px-4 pt-8 pb-4 bg-teal-500 flex justify-between flex-col",
+    "h-screen fixed sticky top-0 px-4 pt-8 pb-4 bg-teal-500 justify-between flex flex-col",
     {
-      ["w-80"]: !toggleCollapse,
+      ["w-60"]: !toggleCollapse,
       ["w-20"]: toggleCollapse,
     }
   );
@@ -128,11 +129,11 @@ const Sidebar = () => {
               <div style={{ width: "2.5rem" }}>
                 <LogoutIcon />
               </div>
-              <Link href={"/profile"}>
+              <Link href={"/admin/profile"}>
                 <span
                   className={classNames("text-md font-medium text-text-light")}
                 >
-                  <a>Perfil</a>
+                  <a>Cerrar sesión</a>
                 </span>
               </Link>
             </div>
