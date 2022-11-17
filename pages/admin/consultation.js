@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import { Textarea } from "@nextui-org/react";
 import Layout from "../../components/layout";
 import { useForm } from "react-hook-form";
@@ -7,9 +7,16 @@ import styles from "../../styles/Home.module.css";
 import { datahelp } from "../../utils/index";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
+import { useAppContext } from "../../context/dataContext";
 import { NUTRINA_API } from "../../utils/config";
 
 const posts = () => {
+  const { currentUser, setCurrentUser } = useAppContext();
+  //ComponentDid
+  useEffect(() => {
+    setCurrentUser(currentUser);
+  }, [currentUser]);
+  //
   const { push } = useRouter();
   const {
     register,
@@ -18,6 +25,7 @@ const posts = () => {
   } = useForm({ mode: "all" });
 
   const onSubmit = async (data) => {
+    //TODO validar si la consulta es nueva o de seguimiento.
     const response = await fetch(
       NUTRINA_API.apiNutrina + "/medical-consultation/medical-consultation",
       {
@@ -138,14 +146,14 @@ const posts = () => {
         label="Peso:"
         required
         type="number"
-        placeholder="80"
+        placeholder="##"
       />
       <Input
         name="height"
         label="Estatura:"
         required
         type="number"
-        placeholder="180"
+        placeholder="##"
       />
       <Input
         name="waist"

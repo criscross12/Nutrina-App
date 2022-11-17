@@ -3,7 +3,7 @@ import { Men, Cart } from "./icons";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { useCookies } from "react-cookie";
-import { NUTRINA_API } from "../utils/config";
+import { login } from "../utils/AuthService";
 
 const Log = () => {
   const [cookie, setCookie] = useCookies(["user"]);
@@ -11,25 +11,18 @@ const Log = () => {
   const { register, handleSubmit } = useForm({});
   const onSubmit = async (data) => {
     try {
-      const user = await fetch(NUTRINA_API.apiUsers + "/auth/login", {
-        method: "POST",
-        body: JSON.stringify({ ...data }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const resUser = await user.json();
-      console.log(resUser);
-      if (resUser["roles"] == "super_admin") {
-        setCookie("user", resUser["token"], {
+      const user = await login(data);
+      console.log("data_user: ", user);
+      if (user["roles"] == "super_admin") {
+        setCookie("user", user["token"], {
           path: "/",
           maxAge: 3600, // Expires after 1hr
           sameSite: true,
         });
         console.log("what");
         push("/admin/dashbord");
-      } else if (resUser["roles"] == "patient") {
-        setCookie("user", resUser["token"], {
+      } else if (user["roles"] == "patient") {
+        setCookie("user", user["token"], {
           path: "/",
           maxAge: 3600, // Expires after 1hr
           sameSite: true,

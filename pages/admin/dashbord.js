@@ -1,10 +1,24 @@
+import { useEffect, useMemo } from "react";
 import Layout from "../../components/layout";
 import CardLineChart from "../../components/Cards/CardLineChart.js";
 import CardBarChart from "../../components/Cards/CardBarChart";
 // import CardPageVisits from "../components/Cards/CardPageVisits.js";
 // import CardSocialTraffic from "../components/Cards/CardSocialTraffic.js";
+import { useContext } from "react";
+import { DataContext } from "../../context/dataContext";
+import { isAuthenticated } from "../../utils/AuthService";
 
 export default function Home() {
+  const { currentUser, setCurrentUser } = useContext(DataContext);
+  const checkLoggedIn = async () => {
+    let cuser = isAuthenticated();
+    setCurrentUser(cuser);
+  };
+  useEffect(() => {
+    checkLoggedIn();
+  }, []);
+  // const values = useMemo(() => currentUser, [currentUser]);
+  // console.log("Usememe", values);
   return (
     <Layout title="Dashbord">
       <>

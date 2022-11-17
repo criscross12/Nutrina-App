@@ -16,11 +16,11 @@ import {
 
 const menuItems = [
   { id: 1, label: "Paciente", icon: UsersIcon, link: "/admin/patients" },
-  { id: 2, label: "Agenda", icon: CalendarIcon, link: "/admin/consultation" },
-  { id: 3, label: "Reportes", icon: Report, link: "/admin/users" },
+  { id: 2, label: "Agenda", icon: CalendarIcon, link: "/admin/diary" },
+  // { id: 3, label: "Reportes", icon: Report, link: "/admin/users" },
   { id: 4, label: "Dashbord", icon: Dashbord, link: "/admin/dashbord" },
   { id: 5, label: "Perfil", icon: LogoutIcon, link: "/admin/profile" },
-  { id: 5, label: "Ayuda", icon: HelpIcon, link: "/" },
+  // { id: 5, label: "Ayuda", icon: HelpIcon, link: "/" },
 ];
 
 const Sidebar = () => {

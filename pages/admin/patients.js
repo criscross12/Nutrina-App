@@ -1,14 +1,22 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { RiDeleteBin6Line, RiHealthBookLine } from "react-icons/ri";
+import { AiOutlineUserAdd } from "react-icons/ai";
+import Link from "next/link";
 import Pagination from "../../components/Pagination";
 import { paginate } from "../../utils/paginate";
 import Layout from "../../components/layout";
-import Navbar from "../../components/NavbarM";
+import { useAppContext } from "../../context/dataContext";
 import { NUTRINA_API } from "../../utils/config";
 
 const Patients = () => {
-  let token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiYTg0MWQwYzktZWM5Zi00ODRkLWJiMDYtZmMzOGIxMzk1ZWM1IiwiZW5hYmxlZCI6dHJ1ZSwiZW1haWwiOiJtaW5nMXNoZWxsQGdtYWlsLmNvbSIsImlhdCI6MTY2Nzg0MDI4NSwiZXhwIjoxNjY3OTI2Njg1fQ.K4vpL1v3POpr2ghFkPSPe2e2_fTwflhq9oaNIsAX1Qg";
+  const { currentUser, setCurrentUser } = useAppContext();
+  //ComponentDid
+  useEffect(() => {
+    setCurrentUser(currentUser);
+  }, [currentUser]);
+  //
+  console.log("consultation: ", currentUser);
   const [users, setUsers] = useState([]);
   const [tableUser, setTableUser] = useState([]);
   const [search, setSearch] = useState("");
@@ -17,7 +25,7 @@ const Patients = () => {
   const getUsers = async () => {
     const { data: res } = await axios.get(NUTRINA_API.apiUsers + "/users", {
       headers: {
-        Authorization: "Bearer " + token,
+        Authorization: "Bearer " + currentUser,
       },
     });
     setUsers(res);
@@ -47,17 +55,26 @@ const Patients = () => {
 
   useEffect(() => {
     getUsers();
-  });
+  }, []);
 
   const paginateUsers = paginate(users, currentPage, pageSize);
 
   return (
     <Layout title="Pacientes">
       <img src="../nutrina1.png" class="absolute right-0 top-0 w-22 h-24"></img>
-      <h3>Lista pacientes</h3>
-      <br />
-      <br />
-      <br />
+      <div className="text-center">
+        <h1 className="text-xl font-bold mb-4">Lista de pacientes</h1>
+      </div>
+      <div>
+        <Link href={"/admin/consultation"}>
+          <button
+            type="button"
+            className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+          >
+            + Nuevo paciente
+          </button>
+        </Link>
+      </div>
       <div className="">
         <form className="flex items-center">
           <label htmlFor="simple-search" className="sr-only">
@@ -173,8 +190,13 @@ const Patients = () => {
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                         {age}
                       </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        Borrar, Eliminar, Consulta
+                      <td className="text-sm text-gray-900 font-light px-3 py-2 whitespace-nowrap">
+                        <button class="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full">
+                          <RiDeleteBin6Line />
+                        </button>
+                        <button class="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-full">
+                          <RiHealthBookLine />
+                        </button>
                       </td>
                     </tr>
                   ))}
