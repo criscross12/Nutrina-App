@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
 import { RiDeleteBin6Line, RiHealthBookLine } from "react-icons/ri";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import Link from "next/link";
@@ -11,6 +12,7 @@ import { NUTRINA_API } from "../../utils/config";
 
 const Patients = () => {
   const { currentUser, setCurrentUser } = useAppContext();
+  const { push } = useRouter();
   //ComponentDid
   useEffect(() => {
     setCurrentUser(currentUser);
@@ -69,9 +71,9 @@ const Patients = () => {
         <Link href={"/admin/consultation"}>
           <button
             type="button"
-            className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+            className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 inline-flex items-center"
           >
-            + Nuevo paciente
+            <AiOutlineUserAdd /> Nuevo paciente
           </button>
         </Link>
       </div>
@@ -173,7 +175,7 @@ const Patients = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {paginateUsers.map(({ name, phone, email, age }, i) => (
+                  {paginateUsers.map(({ uuid, name, phone, email, age }, i) => (
                     <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         {i + 1}
@@ -191,7 +193,11 @@ const Patients = () => {
                         {age}
                       </td>
                       <td className="text-sm text-gray-900 font-light px-3 py-2 whitespace-nowrap">
-                        <button class="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full">
+                        <button
+                          key={uuid}
+                          onClick={() => push("/admin/uuid/" + uuid)}
+                          class="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full"
+                        >
                           <RiDeleteBin6Line />
                         </button>
                         <button class="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-full">

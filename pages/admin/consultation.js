@@ -17,7 +17,20 @@ const posts = () => {
     setCurrentUser(currentUser);
   }, [currentUser]);
   //
-  const { push } = useRouter();
+  const { push, query } = useRouter();
+  useEffect(() => {
+    if (query.id) {
+      console.log(query.id);
+    }
+  }, []);
+
+  let image = "";
+  if (query.id) {
+    image = "../../nutrina1.png";
+    console.log(query.id);
+  } else {
+    image = "../nutrina1.png";
+  }
   const {
     register,
     handleSubmit,
@@ -473,26 +486,38 @@ const posts = () => {
 
   const [step, setStep] = useState(0);
 
-  const fieldGroups = [
-    <PersonFields />,
-    <ContactFields />,
-    <AddressFields />,
-    <VitalSignsFields />,
-    <PlyometricFields />,
-    <CircumferencesFields />,
-    <BoneDiametersFields />,
-    <DistributionFields />,
-    <NotesFields />,
-  ];
+  let fieldGroups = [];
+  if (query.id) {
+    fieldGroups = [
+      // <PersonFields />,
+      <ContactFields />,
+      <AddressFields />,
+      <VitalSignsFields />,
+      <PlyometricFields />,
+      <CircumferencesFields />,
+      <BoneDiametersFields />,
+      <DistributionFields />,
+      <NotesFields />,
+    ];
+  } else {
+    fieldGroups = [
+      <PersonFields />,
+      <ContactFields />,
+      <AddressFields />,
+      <VitalSignsFields />,
+      <PlyometricFields />,
+      <CircumferencesFields />,
+      <BoneDiametersFields />,
+      <DistributionFields />,
+      <NotesFields />,
+    ];
+  }
 
   return (
     <Layout title={"Consulta"}>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <h2>Registro de Pacientes</h2>
-        <img
-          src="../nutrina1.png"
-          class="absolute right-0 top-0 w-22 h-24"
-        ></img>
+        <img src={image} class="absolute right-0 top-0 w-22 h-24"></img>
         {fieldGroups[step]}
         <Navigation />
         <Reference />
