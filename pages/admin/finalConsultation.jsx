@@ -1,96 +1,243 @@
-import Layout from "../../components/layout";
+import { useContext, useEffect } from "react";
+import { DataContext } from "../../context/dataContext";
+import { isAuthenticated } from "../../utils/AuthService";
+import Navbar from "../../components/navBarC";
 
 export default function Home() {
+  const { currentUser, setCurrentUser } = useContext(DataContext);
+  console.log("User: ", currentUser);
+  const checkLoggedIn = async () => {
+    let cuser = isAuthenticated();
+    setCurrentUser(cuser);
+  };
+  useEffect(() => {
+    checkLoggedIn();
+  }, []);
   return (
-    <Layout title="Final de la consulta">
-      <h1>
-        El término objeto volador no identificado, más conocido por el acrónimo
-        ovni,2​nota 1​ se refiere a la observación de un objeto volador, real o
-        aparente, que no puede ser identificado por el observador y cuyo origen
-        sigue siendo desconocido después de una investigación. El acrónimo fue
-        creado para reemplazar al de «platillo volante», ya que a diferencia de
-        este un ovni no tiene por qué ser necesariamente un objeto tecnológico o
-        tripulado (puede ser también una estrella, un meteorito o un avión
-        desconocido), y ha llegado a trascender más allá de las simples
-        observaciones aéreas. Aunque autores como Erich von Däniken o Jacques
-        Vallée han apuntado que los antiguos carros de los dioses o las
-        apariciones y raptos en bosques y pantanos podían ser el equivalente a
-        los relatos ovni actuales, el fenómeno comenzó en 1947, íntimamente
-        vinculado a los medios de comunicación. La literatura especializada en
-        estos temas ha ido creciendo en número de cabeceras y tirada, para pasar
-        a recoger también supuestos contactos telepáticos, pretendidos
-        secuestros y declaraciones sobre experimentos genéticos realizados por
-        los tripulantes de dichos objetos. Todas estas afirmaciones
-        extraordinarias tienen en común la ausencia de pruebas extraordinarias
-        que las demuestren. Pese a ello, la hipótesis extraterrestre sigue
-        siendo tema de debate.
-      </h1>
-      <h1>
-        El término objeto volador no identificado, más conocido por el acrónimo
-        ovni,2​nota 1​ se refiere a la observación de un objeto volador, real o
-        aparente, que no puede ser identificado por el observador y cuyo origen
-        sigue siendo desconocido después de una investigación. El acrónimo fue
-        creado para reemplazar al de «platillo volante», ya que a diferencia de
-        este un ovni no tiene por qué ser necesariamente un objeto tecnológico o
-        tripulado (puede ser también una estrella, un meteorito o un avión
-        desconocido), y ha llegado a trascender más allá de las simples
-        observaciones aéreas. Aunque autores como Erich von Däniken o Jacques
-        Vallée han apuntado que los antiguos carros de los dioses o las
-        apariciones y raptos en bosques y pantanos podían ser el equivalente a
-        los relatos ovni actuales, el fenómeno comenzó en 1947, íntimamente
-        vinculado a los medios de comunicación. La literatura especializada en
-        estos temas ha ido creciendo en número de cabeceras y tirada, para pasar
-        a recoger también supuestos contactos telepáticos, pretendidos
-        secuestros y declaraciones sobre experimentos genéticos realizados por
-        los tripulantes de dichos objetos. Todas estas afirmaciones
-        extraordinarias tienen en común la ausencia de pruebas extraordinarias
-        que las demuestren. Pese a ello, la hipótesis extraterrestre sigue
-        siendo tema de debate.
-      </h1>
-      <h1>
-        El término objeto volador no identificado, más conocido por el acrónimo
-        ovni,2​nota 1​ se refiere a la observación de un objeto volador, real o
-        aparente, que no puede ser identificado por el observador y cuyo origen
-        sigue siendo desconocido después de una investigación. El acrónimo fue
-        creado para reemplazar al de «platillo volante», ya que a diferencia de
-        este un ovni no tiene por qué ser necesariamente un objeto tecnológico o
-        tripulado (puede ser también una estrella, un meteorito o un avión
-        desconocido), y ha llegado a trascender más allá de las simples
-        observaciones aéreas. Aunque autores como Erich von Däniken o Jacques
-        Vallée han apuntado que los antiguos carros de los dioses o las
-        apariciones y raptos en bosques y pantanos podían ser el equivalente a
-        los relatos ovni actuales, el fenómeno comenzó en 1947, íntimamente
-        vinculado a los medios de comunicación. La literatura especializada en
-        estos temas ha ido creciendo en número de cabeceras y tirada, para pasar
-        a recoger también supuestos contactos telepáticos, pretendidos
-        secuestros y declaraciones sobre experimentos genéticos realizados por
-        los tripulantes de dichos objetos. Todas estas afirmaciones
-        extraordinarias tienen en común la ausencia de pruebas extraordinarias
-        que las demuestren. Pese a ello, la hipótesis extraterrestre sigue
-        siendo tema de debate.
-      </h1>
-      <h1>
-        El término objeto volador no identificado, más conocido por el acrónimo
-        ovni,2​nota 1​ se refiere a la observación de un objeto volador, real o
-        aparente, que no puede ser identificado por el observador y cuyo origen
-        sigue siendo desconocido después de una investigación. El acrónimo fue
-        creado para reemplazar al de «platillo volante», ya que a diferencia de
-        este un ovni no tiene por qué ser necesariamente un objeto tecnológico o
-        tripulado (puede ser también una estrella, un meteorito o un avión
-        desconocido), y ha llegado a trascender más allá de las simples
-        observaciones aéreas. Aunque autores como Erich von Däniken o Jacques
-        Vallée han apuntado que los antiguos carros de los dioses o las
-        apariciones y raptos en bosques y pantanos podían ser el equivalente a
-        los relatos ovni actuales, el fenómeno comenzó en 1947, íntimamente
-        vinculado a los medios de comunicación. La literatura especializada en
-        estos temas ha ido creciendo en número de cabeceras y tirada, para pasar
-        a recoger también supuestos contactos telepáticos, pretendidos
-        secuestros y declaraciones sobre experimentos genéticos realizados por
-        los tripulantes de dichos objetos. Todas estas afirmaciones
-        extraordinarias tienen en común la ausencia de pruebas extraordinarias
-        que las demuestren. Pese a ello, la hipótesis extraterrestre sigue
-        siendo tema de debate.
-      </h1>{" "}
-    </Layout>
+    <Navbar>
+      <div className="relative">
+        <table width="150%">
+          <tbody>
+            <tr>
+              <td width="20%" align="center" valign="middle">
+                img_nutrina
+              </td>
+              <td width="60%" align="center" valign="middle">
+                <p>
+                  <strong>L.N Monserrat Piña Jiménez</strong>
+                </p>
+                <p>Cédula Profesional: 12490409 UAEMéx</p>
+              </td>
+              <td width="20%" align="center" valign="middle">
+                logo-nu
+              </td>
+            </tr>
+            <tr>
+              <td align="center" valign="middle">
+                &nbsp;
+              </td>
+              <td align="left" valign="middle">
+                Nombre del paciente:{" "}
+              </td>
+              <td align="center" valign="middle">
+                &nbsp;
+              </td>
+            </tr>
+            <tr>
+              <td align="center" valign="middle">
+                &nbsp;
+              </td>
+              <td align="left" valign="middle">
+                Edad:{" "}
+              </td>
+              <td align="center" valign="middle">
+                &nbsp;
+              </td>
+            </tr>
+            <tr>
+              <td colSpan={3} align="center" valign="middle">
+                <table width="100%">
+                  <tbody>
+                    <tr>
+                      <td>N° de medición</td>
+                      <td>1 medición</td>
+                      <td>2 medición</td>
+                      <td>3 medición</td>
+                      <td>4 medición</td>
+                      <td>5 medición</td>
+                      <td>6 medición</td>
+                    </tr>
+                    <tr>
+                      <td>Fecha </td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td>T/A mm Hg</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td>Glucemia Capilar (mg/dl)</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td>Peso (kg)</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td>Estatura (cm)</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td>Cintura (cm)</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td>Cadera (cm)</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td>ICC</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td>% Grasa</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td>Kg Grasa</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td>Grasa visceral</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td>% Músculo</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td>Kg músculo</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td>Edad corporal</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td>IMC</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td>CMB</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td colSpan={2} align="center" valign="middle">
+                <table width="50%" border={0}>
+                  <tbody>
+                    <tr>
+                      <td>
+                        {" "}
+                        <p>Parametros de referencia</p>
+                        <p>Femenina 20-39 años</p>
+                        <p>% Grasa Corporal: 21-39.9</p>
+                        <p>Grasa Visceral: 1- 9</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+              <td align="center" valign="middle">
+                IMG_REFERENCIA
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </Navbar>
   );
 }

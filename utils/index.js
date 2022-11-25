@@ -1,6 +1,19 @@
 export const datahelp = (data) => {
   const user_uuid = "";
   const patient_uuid = "";
+  const note = data["note"];
+
+  const data_patient = {
+    name: data["name"],
+    first_name: data["first_name"],
+    second_name: data["second_name"],
+    date_of_birth: data["date_of_birth"],
+    email: data["email"],
+    ocupation: data["ocupation"],
+    phone: data["phone"],
+    reason: data["reason"],
+    sex: data["sex"],
+  };
 
   const basic_measurements = {
     weight: parseInt(data["weight"]),
@@ -46,10 +59,6 @@ export const datahelp = (data) => {
     kcalProteins: parseInt(data["kcalProteins"]),
   };
 
-  const note = {
-    note: data["note"],
-  };
-
   const dataResponse = {
     user_uuid,
     patient_uuid,
@@ -64,19 +73,4 @@ export const datahelp = (data) => {
     note,
   };
   return dataResponse;
-};
-
-export const dataPatient = (data) => {
-  const data_patient = {
-    name: data["name"],
-    first_name: data["first_name"],
-    second_name: data["second_name"],
-    date_of_birth: data["date_of_birth"],
-    email: data["email"],
-    ocupation: data["ocupation"],
-    phone: data["phone"],
-    reason: data["reason"],
-    sex: data["sex"],
-  };
-  return data_patient;
 };

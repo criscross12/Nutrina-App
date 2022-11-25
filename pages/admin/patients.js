@@ -1,28 +1,39 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { RiDeleteBin6Line, RiHealthBookLine } from "react-icons/ri";
+import {
+  RiDeleteBin6Line,
+  RiFolderHistoryFill,
+  RiHealthBookLine,
+} from "react-icons/ri";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import Link from "next/link";
 import Pagination from "../../components/Pagination";
 import { paginate } from "../../utils/paginate";
 import Layout from "../../components/layout";
-import { useAppContext } from "../../context/dataContext";
+import Swal from "sweetalert2";
+import { useContext } from "react";
+import { DataContext } from "../../context/dataContext";
+import { isAuthenticated } from "../../utils/AuthService";
 import { NUTRINA_API } from "../../utils/config";
 
 const Patients = () => {
-  const { currentUser, setCurrentUser } = useAppContext();
+  const { currentUser, setCurrentUser } = useContext(DataContext);
+  console.log("User: ", currentUser);
+  const checkLoggedIn = async () => {
+    let cuser = isAuthenticated();
+    setCurrentUser(cuser);
+  };
+  useEffect(() => {
+    checkLoggedIn();
+  }, []);
   const { push } = useRouter();
   //ComponentDid
-  useEffect(() => {
-    setCurrentUser(currentUser);
-  }, [currentUser]);
   //
-  console.log("consultation: ", currentUser);
   const [users, setUsers] = useState([]);
   const [tableUser, setTableUser] = useState([]);
   const [search, setSearch] = useState("");
-  const pageSize = 6;
+  const pageSize = 5;
   const [currentPage, setCurrentPage] = useState(1);
   const getUsers = async () => {
     const { data: res } = await axios.get(NUTRINA_API.apiUsers + "/users", {
@@ -42,13 +53,43 @@ const Patients = () => {
   const filterByValue = (itemValue) => {
     var resSearch = tableUser.filter((e) => {
       if (
-        e.name?.includes(itemValue)
+        e.name?.includes(itemValue) ||
+        e.first_name?.includes(itemValue) ||
+        e.second_name?.includes(itemValue)
         // || e.company.name.toString().toLowerCase().includes(itemValue.toLowerCase())
       ) {
         return e;
       }
     });
     setUsers(resSearch);
+  };
+
+  const DeleteUser = (uuid) => {
+    const deleteP = async () => {
+      const response = await axios.delete(
+        NUTRINA_API.apiUsers + "/users/" + uuid,
+        {
+          headers: {
+            Authorization: "Bearer " + currentUser,
+          },
+        }
+      );
+      getUsers();
+    };
+    Swal.fire({
+      title: "Eliminar paciente?",
+      text: "Esta acción desactivará al paciente!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, Eliminar!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteP();
+        Swal.fire("Deleted!", "El paciente ha sido eliminado", "success");
+      }
+    });
   };
 
   const handlePageChange = (page) => {
@@ -101,7 +142,7 @@ const Patients = () => {
             <input
               type="text"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="Search"
+              placeholder="Buscar paciente"
               required=""
               onChange={handleValueChange}
               value={search}
@@ -158,7 +199,7 @@ const Patients = () => {
                       scope="col"
                       className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                     >
-                      Sexo
+                      Correo electronico
                     </th>
                     <th
                       scope="col"
@@ -175,37 +216,63 @@ const Patients = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {paginateUsers.map(({ uuid, name, phone, email, age }, i) => (
-                    <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        {i + 1}
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {name}
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {phone}
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {email}
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {age}
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-3 py-2 whitespace-nowrap">
-                        <button
-                          key={uuid}
-                          onClick={() => push("/admin/uuid/" + uuid)}
-                          class="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full"
-                        >
-                          <RiDeleteBin6Line />
-                        </button>
-                        <button class="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-full">
-                          <RiHealthBookLine />
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
+                  {paginateUsers.map(
+                    (
+                      {
+                        uuid,
+                        name,
+                        first_name,
+                        second_name,
+                        phone,
+                        email,
+                        age,
+                      },
+                      i
+                    ) => (
+                      <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                          {i + 1}
+                        </td>
+                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                          {name + " " + first_name + " " + second_name}
+                        </td>
+                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                          {phone}
+                        </td>
+                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                          {email}
+                        </td>
+                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                          {age}
+                        </td>
+                        <td className="text-sm text-gray-900 font-light px-3 py-2 whitespace-nowrap">
+                          <button
+                            key={uuid}
+                            onClick={() => {
+                              DeleteUser(uuid);
+                            }}
+                            class="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full"
+                          >
+                            <RiDeleteBin6Line />
+                          </button>
+                          &nbsp;
+                          <button
+                            onClick={() => push("/admin/uuid/" + uuid)}
+                            class="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-full"
+                          >
+                            <RiHealthBookLine />
+                          </button>
+                          &nbsp;
+                          <button
+                            onClick={() => push("/admin/history/" + uuid)}
+                            class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-full"
+                          >
+                            <RiFolderHistoryFill />
+                          </button>
+                        </td>
+                      </tr>
+                    )
+                  )}
                 </tbody>
               </table>
             </div>

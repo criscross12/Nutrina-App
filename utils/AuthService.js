@@ -18,6 +18,21 @@ export const login = async (data) => {
   return resUser;
 };
 
+export const logOut = async (token) => {
+  try {
+    const user = await fetch(NUTRINA_API.apiUsers + "/auth/logout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
+    return user;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export function isAuthenticated() {
   const getCookie = document.cookie.split("=");
   const token = getCookie[1];

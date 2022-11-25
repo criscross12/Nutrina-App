@@ -1,7 +1,12 @@
 import classNames from "classnames";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useContext, useEffect } from "react";
+import { AiOutlineLogout } from "react-icons/ai";
+import { FaLeaf } from "react-icons/fa";
+import { DataContext } from "../context/dataContext";
+import { isAuthenticated, logOut } from "../utils/AuthService";
+import { useCookies } from "react-cookie";
 import {
   ArticleIcon,
   CollapsIcon,
@@ -24,10 +29,21 @@ const menuItems = [
 ];
 
 const Sidebar = () => {
+  const { currentUser, setCurrentUser } = useContext(DataContext);
+  const checkLoggedIn = async () => {
+    let cuser = isAuthenticated();
+    setCurrentUser(cuser);
+  };
+  useEffect(() => {
+    checkLoggedIn();
+  }, []);
+
   const [toggleCollapse, setToggleCollapse] = useState(false);
   const [isCollapsible, setIsCollapsible] = useState(false);
 
+  const [cookie, setCookie] = useCookies(["user"]);
   const router = useRouter();
+  const { push } = useRouter();
 
   const activeMenu = useMemo(
     () => menuItems.find((menu) => menu.link === router.pathname),
@@ -62,10 +78,22 @@ const Sidebar = () => {
   const handleSidebarToggle = () => {
     setToggleCollapse(!toggleCollapse);
   };
+  const logOutHandedl = async () => {
+    const res = await logOut(currentUser);
+    console.log(res);
+    if (res.status == 200) {
+      setCookie("user", "", {
+        path: "/",
+        maxAge: 0,
+        sameSite: true,
+      });
+      push("/");
+    }
+  };
 
   return (
-    <div class="flex">
-      <aside class="h-screen sticky top-0">
+    <div className="flex">
+      <aside className="h-screen sticky top-0 shadow-2xl">
         <div className="hidden md:block">
           <div
             className={wrapperClasses}
@@ -76,7 +104,7 @@ const Sidebar = () => {
             <div className="flex flex-col">
               <div className="flex items-center justify-between relative">
                 <div className="flex items-center pl-1 gap-4">
-                  <LogoIcon />
+                  <FaLeaf className="h-8 w-8 text-white" />
                   <span
                     className={classNames(
                       "mt-2 text-lg font-medium text-text",
@@ -125,17 +153,18 @@ const Sidebar = () => {
               </div>
             </div>
 
-            <div className={`${getNavItemClasses({})} px-3 py-4 `}>
+            <div
+              className={`${getNavItemClasses({})} px-3 py-4 `}
+              onClick={() => logOutHandedl()}
+            >
               <div style={{ width: "2.5rem" }}>
-                <LogoutIcon />
+                <AiOutlineLogout className="h-8 w-8 text-white" />
               </div>
-              <Link href={"/admin/profile"}>
-                <span
-                  className={classNames("text-md font-medium text-text-light")}
-                >
-                  <a>Cerrar sesión</a>
-                </span>
-              </Link>
+              <span
+                className={classNames("text-md font-medium text-text-light")}
+              >
+                <a>Cerrar sesión</a>
+              </span>
             </div>
           </div>
         </div>

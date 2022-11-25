@@ -6,7 +6,7 @@ export { default as CollapsIcon } from "./CollapsIcon";
 export { default as LogoIcon } from "./Logo";
 export { default as LogoutIcon } from "./LogoutIcon";
 export { default as Report } from "./Report";
-export { default as Configuration } from "./Configuration";
+export { default as Configuration } from "./configuration";
 export { default as Phone } from "./Phone";
 export { default as Ubication } from "./Ubication";
 export { default as Email } from "./Email";

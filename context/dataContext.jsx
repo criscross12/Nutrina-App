@@ -1,12 +1,10 @@
 import { createContext, useState, useContext } from "react";
-// import { isAuthenticated } from "../utils/AuthService";
-
 export const DataContext = createContext(null);
 
 const DataContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(undefined);
-  const valor = { currentUser, setCurrentUser };
 
+  const valor = { currentUser, setCurrentUser };
   return <DataContext.Provider value={valor}>{children}</DataContext.Provider>;
 };
 
