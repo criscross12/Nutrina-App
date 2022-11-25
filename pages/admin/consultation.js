@@ -24,13 +24,6 @@ const posts = () => {
     }
   }, []);
 
-  let image = "";
-  if (query.id) {
-    image = "../../nutrina1.png";
-    console.log(query.id);
-  } else {
-    image = "../nutrina1.png";
-  }
   const {
     register,
     handleSubmit,
@@ -39,26 +32,38 @@ const posts = () => {
 
   const onSubmit = async (data) => {
     //TODO validar si la consulta es nueva o de seguimiento.
+    const dataSend = datahelp(data);
+    if (query.id) dataSend.patient_uuid = query.id;
+    console.log(currentUser);
     const response = await fetch(
       NUTRINA_API.apiNutrina + "/medical-consultation/medical-consultation",
       {
         method: "POST",
-        body: JSON.stringify(datahelp(data)),
+        body: JSON.stringify(dataSend),
         headers: {
           "Content-Type": "application/json",
+          Authorization: "Bearer " + currentUser,
         },
       }
     );
-    const res = await response.json();
-    Swal.fire({
-      position: "top-start",
-      icon: "success",
-      title: "Your work has been saved",
-      showConfirmButton: false,
-      timer: 1500,
-    });
-    console.log(res);
-    push("/admin/finalConsultation");
+    const uuidConsultation = await response.json();
+    console.log("res: ", uuidConsultation.uuid);
+    if (response.status == 200) {
+      Swal.fire({
+        position: "top-start",
+        icon: "success",
+        title: "Your work has been saved",
+        showConfirmButton: true,
+        timer: 1500,
+      });
+      push("/admin/history/" + uuidConsultation.uuid);
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Algo salio mal!",
+      });
+    }
   };
 
   /** Input field component */
@@ -415,9 +420,9 @@ const posts = () => {
         <br />
         <br />
         <Textarea
+          {...register("note")}
           rows="5"
           cols="150"
-          name="note"
           bordered
           color="primary"
           labelPlaceholder="Agregar notas"
@@ -453,7 +458,7 @@ const posts = () => {
           }}
         >
           <img src={rightArrow} />
-          NEXT
+          Siguiente
         </button>
       )}
       {step > 0 && (
@@ -465,7 +470,7 @@ const posts = () => {
           }}
         >
           <img src={leftArrow} />
-          BACK
+          Atrás
         </button>
       )}
     </section>
@@ -516,8 +521,13 @@ const posts = () => {
   return (
     <Layout title={"Consulta"}>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <h2>Registro de Pacientes</h2>
-        <img src={image} class="absolute right-0 top-0 w-22 h-24"></img>
+        <h2>
+          {query.id ? "Seguimiento de paciente" : "Registro de Pacientes"}
+        </h2>
+        <img
+          src={query.id ? "../../nutrina1.png" : "../nutrina1.png"}
+          class="absolute right-0 top-0 w-22 h-24"
+        ></img>
         {fieldGroups[step]}
         <Navigation />
         <Reference />
