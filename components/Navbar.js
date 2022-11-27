@@ -6,8 +6,8 @@ import {GrFormClose} from "react-icons/gr";
 
 const Navigation = [
     {name:"Inicio", href:"initial",current:true},
-    {name:"Peguntas frecuentes", href:"page",current:false},
-    {name:"Contacto", href:"#",current:false},
+    {name:"Sobre nosotros", href:"page",current:false},
+    {name:"Contacto", href:"contact",current:false},
 ];
 
 function classNames(...classes){
