@@ -60,7 +60,7 @@ export default function section2() {
               <table className="border-separate border border-slate-400 font-serif">
                 <thead>
                   <tr>
-                    <th className="border border-slate-300 " COLSPAN="2">
+                    <th className="border border-slate-300 " colSpan="2">
                       Planes de alimentación personalizados
                     </th>
                   </tr>
