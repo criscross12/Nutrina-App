@@ -16,6 +16,7 @@ import { useContext } from "react";
 import { DataContext } from "../../context/dataContext";
 import { isAuthenticated } from "../../utils/AuthService";
 import { NUTRINA_API } from "../../utils/config";
+import Image from "next/image";
 
 const Patients = () => {
   const { currentUser, setCurrentUser } = useContext(DataContext);
@@ -104,7 +105,11 @@ const Patients = () => {
 
   return (
     <Layout title="Pacientes">
-      <img src="../nutrina1.png" class="absolute right-0 top-0 w-22 h-24"></img>
+      <Image
+        alt="test"
+        src="../nutrina1.png"
+        class="absolute right-0 top-0 w-22 h-24"
+      />
       <div className="text-center">
         <h1 className="text-xl font-bold mb-4">Lista de pacientes</h1>
       </div>
@@ -264,7 +269,9 @@ const Patients = () => {
                           </button>
                           &nbsp;
                           <button
-                            onClick={() => push("/admin/history/" + uuid)}
+                            onClick={() =>
+                              push("/admin/history/" + uuid + "?type=history")
+                            }
                             class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-full"
                           >
                             <RiFolderHistoryFill />

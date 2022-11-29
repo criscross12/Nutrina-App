@@ -14,7 +14,12 @@ export default function section2() {
         <div className="flex flex-wrap justify-center">
           <div className="w-full px-4 font-mono">
             <div className="hero border-gray-500 rounded-md p-10">
-              <Image src={"/images/nutrina1.png"} width={700} height={500} />
+              <Image
+                src={"/images/nutrina1.png"}
+                alt="description of image"
+                width={700}
+                height={500}
+              />
               <span className="text-primary font-semibold text-lg block mb-4">
                 Consulta Nutricional
               </span>
@@ -34,7 +39,12 @@ export default function section2() {
         <div className="flex flex-wrap justify-center">
           <div className="w-full px-4">
             <div className="hero border-gray-500 rounded-md p-10 font-mono">
-              <Image src={"/images/ima.png"} width={3400} height={1650} />
+              <Image
+                src={"/images/ima.png"}
+                alt="description of image"
+                width={3400}
+                height={1650}
+              />
               <span className="text-primary font-semibold text-lg block mb-4">
                 Servicios
               </span>
@@ -43,6 +53,7 @@ export default function section2() {
                 <Image
                   className="float-right"
                   src={"/images/imagen3.png"}
+                  alt="description of image"
                   width={20}
                   height={25}
                 />
@@ -52,6 +63,7 @@ export default function section2() {
                 <Image
                   className="float-right"
                   src={"/images/imagen4.png"}
+                  alt="description of image"
                   width={20}
                   height={25}
                 />
@@ -115,7 +127,12 @@ export default function section2() {
         <div className="flex flex-wrap justify-center">
           <div className="w-full px-4">
             <div className="hero border-gray-500 rounded-md p-10">
-              <Image src={"/images/foto3.png"} width={1500} height={1500} />
+              <Image
+                src={"/images/foto3.png"}
+                alt="description of image"
+                width={1500}
+                height={1500}
+              />
               <span className="text-primary font-semibold text-lg block mb-4">
                 Lite
               </span>

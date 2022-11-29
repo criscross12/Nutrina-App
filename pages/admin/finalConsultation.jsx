@@ -1,9 +1,12 @@
 import { useContext, useEffect } from "react";
 import { DataContext } from "../../context/dataContext";
-import { isAuthenticated } from "../../utils/AuthService";
+import { isAuthenticated, getMedicalRes } from "../../utils/AuthService";
+import { useRouter } from "next/router";
 import Navbar from "../../components/navBarC";
 
 export default function Home() {
+  const { push, query } = useRouter();
+
   const { currentUser, setCurrentUser } = useContext(DataContext);
   console.log("User: ", currentUser);
   const checkLoggedIn = async () => {
@@ -13,230 +16,86 @@ export default function Home() {
   useEffect(() => {
     checkLoggedIn();
   }, []);
+  console.log(query.type);
+  getMedicalRes(query.id, query.type, currentUser);
   return (
     <Navbar>
-      <div className="relative">
-        <table width="150%">
-          <tbody>
-            <tr>
-              <td width="20%" align="center" valign="middle">
-                img_nutrina
-              </td>
-              <td width="60%" align="center" valign="middle">
-                <p>
-                  <strong>L.N Monserrat Piña Jiménez</strong>
-                </p>
-                <p>Cédula Profesional: 12490409 UAEMéx</p>
-              </td>
-              <td width="20%" align="center" valign="middle">
-                logo-nu
-              </td>
-            </tr>
-            <tr>
-              <td align="center" valign="middle">
-                &nbsp;
-              </td>
-              <td align="left" valign="middle">
-                Nombre del paciente:{" "}
-              </td>
-              <td align="center" valign="middle">
-                &nbsp;
-              </td>
-            </tr>
-            <tr>
-              <td align="center" valign="middle">
-                &nbsp;
-              </td>
-              <td align="left" valign="middle">
-                Edad:{" "}
-              </td>
-              <td align="center" valign="middle">
-                &nbsp;
-              </td>
-            </tr>
-            <tr>
-              <td colSpan={3} align="center" valign="middle">
-                <table width="100%">
-                  <tbody>
-                    <tr>
-                      <td>N° de medición</td>
-                      <td>1 medición</td>
-                      <td>2 medición</td>
-                      <td>3 medición</td>
-                      <td>4 medición</td>
-                      <td>5 medición</td>
-                      <td>6 medición</td>
-                    </tr>
-                    <tr>
-                      <td>Fecha </td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td>T/A mm Hg</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td>Glucemia Capilar (mg/dl)</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td>Peso (kg)</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td>Estatura (cm)</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td>Cintura (cm)</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td>Cadera (cm)</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td>ICC</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td>% Grasa</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td>Kg Grasa</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td>Grasa visceral</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td>% Músculo</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td>Kg músculo</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td>Edad corporal</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td>IMC</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td>CMB</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <td colSpan={2} align="center" valign="middle">
-                <table width="50%" border={0}>
-                  <tbody>
-                    <tr>
-                      <td>
-                        {" "}
-                        <p>Parametros de referencia</p>
-                        <p>Femenina 20-39 años</p>
-                        <p>% Grasa Corporal: 21-39.9</p>
-                        <p>Grasa Visceral: 1- 9</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-              <td align="center" valign="middle">
-                IMG_REFERENCIA
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div className="flex flex-col">
+        <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+            <div className="overflow-hidden">
+              <table className="min-w-full">
+                <thead className="border-b bg-teal-500">
+                  <tr>
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    >
+                      #
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    >
+                      Nombre Completo
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    >
+                      Número Telefónico
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    >
+                      Correo electronico
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    >
+                      Edad
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    >
+                      Acciones
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      1
+                    </td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      hola
+                    </td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      713
+                    </td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      de
+                    </td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      15
+                    </td>
+                    <td className="text-sm text-gray-900 font-light px-3 py-2 whitespace-nowrap">
+                      <button class="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full"></button>
+                      &nbsp;
+                      <button class="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-full"></button>
+                      &nbsp;
+                      <button class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-full"></button>
+                    </td>
+                  </tr>
+                  )
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
     </Navbar>
   );

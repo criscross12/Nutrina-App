@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { useCookies } from "react-cookie";
 import { login } from "../utils/AuthService";
 import { useState } from "react";
+import Image from "next/image";
 
 const Log = () => {
   const [cookie, setCookie] = useCookies(["user"]);
@@ -42,10 +43,11 @@ const Log = () => {
             <div className="flex flex-col w-full md:w-1/2 p-4">
               <div className="flex flex-col flex-1 justify-center mb-4">
                 <div className="flex justify-center">
-                  <img
+                  <Image
+                    alt="test"
                     src="nutrina1.png"
                     className="flex justify-center w-24 h-22 hover:scale-110 hover:rotate-12"
-                  ></img>
+                  />
                 </div>
                 <h1 className="text-4xl text-center font-thin text-green-500">
                   Bienvenido
@@ -108,7 +110,7 @@ const Log = () => {
               </div>
             </div>
             <div className="hidden md:flex md:w-1/2 w-full">
-              <img src="cd.jpg" className="flex rounded-r-lg"></img>
+              <Image alt="test" src="cd.jpg" className="flex rounded-r-lg" />
             </div>
           </div>
         </div>

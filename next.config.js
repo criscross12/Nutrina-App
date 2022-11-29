@@ -1,5 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  exportPathMap: async function (_defaultPathMap, _options) {
+    return {
+      "/": { page: "/" },
+    };
+  },
+  images: {
+    loader: "imgix",
+    path: "/",
+  },
+  experimental: {
+    images: {
+      unoptimized: true,
+    },
+  },
   eslint: {
     // Warning: This allows production builds to successfully complete even if
     // your project has ESLint errors.

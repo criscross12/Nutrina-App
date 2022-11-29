@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import Swal from "sweetalert2";
 import { useAppContext } from "../../context/dataContext";
 import { NUTRINA_API } from "../../utils/config";
+import Image from "next/image";
 
 const posts = () => {
   const { currentUser, setCurrentUser } = useAppContext();
@@ -56,7 +57,9 @@ const posts = () => {
         showConfirmButton: true,
         timer: 1500,
       });
-      push("/admin/history/" + uuidConsultation.uuid);
+      push(
+        "/admin/history/" + uuidConsultation.uuid + "?type=finalConsultation"
+      );
     } else {
       Swal.fire({
         icon: "error",
@@ -457,7 +460,7 @@ const posts = () => {
             setStep(step + 1);
           }}
         >
-          <img src={rightArrow} />
+          <Image src={rightArrow} alt="description of image" />
           Siguiente
         </button>
       )}
@@ -469,7 +472,7 @@ const posts = () => {
             setStep(step - 1);
           }}
         >
-          <img src={leftArrow} />
+          <Image src={leftArrow} alt="description of image" />
           Atrás
         </button>
       )}
@@ -524,10 +527,11 @@ const posts = () => {
         <h2>
           {query.id ? "Seguimiento de paciente" : "Registro de Pacientes"}
         </h2>
-        <img
+        <Image
           src={query.id ? "../../nutrina1.png" : "../nutrina1.png"}
+          alt="description of image"
           class="absolute right-0 top-0 w-22 h-24"
-        ></img>
+        />
         {fieldGroups[step]}
         <Navigation />
         <Reference />

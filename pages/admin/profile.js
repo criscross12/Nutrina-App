@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Sidebar from "../../components/Sidebar";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -8,14 +9,14 @@ export default function Home() {
 
       <div class="mx-auto container max-w-1xl md:w-3/4 shadow-md -space-y-4">
         <div class=" border-t-2 rounded-t ">
-          <img
+          <Image
             class=" container  rounded-t  h-36"
             alt="User avatar"
             src="../portada.jpg"
           />
         </div>
         <div class="mb-2">
-          <img
+          <Image
             class=" -mt-8 inline-flex rounded-full"
             src="../perfil.jpg"
             width="64"

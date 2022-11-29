@@ -18,6 +18,50 @@ export const login = async (data) => {
   return resUser;
 };
 
+export const getMedicalRes = async (uuid, type, token) => {
+  if (type == "finalConsultation") {
+    try {
+      const data = await fetch(
+        NUTRINA_API.apiNutrina + "/medical-consultation/One/" + uuid,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      const getData = await data.json();
+      console.log(getData);
+      return getData;
+    } catch (error) {
+      console.log(error);
+    }
+
+    return getData;
+  } else if (type == "history") {
+    try {
+      const data = await fetch(
+        NUTRINA_API.apiNutrina + "/medical-consultation/" + uuid,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      const getData = await data.json();
+      console.log(getData);
+      return getData;
+    } catch (error) {
+      console.log(error);
+    }
+
+    return getData;
+  }
+};
+
 export const logOut = async (token) => {
   try {
     const user = await fetch(NUTRINA_API.apiUsers + "/auth/logout", {
