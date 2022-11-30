@@ -45,11 +45,13 @@ const Log = () => {
                 <div className="flex justify-center">
                   <Image
                     alt="test"
-                    src="nutrina1.png"
-                    className="flex justify-center w-24 h-22 hover:scale-110 hover:rotate-12"
+                    src="/nutrina1.png"
+                    width="125"
+                    height="105"
+                    className="flex justify-center hover:scale-110 hover:rotate-12"
                   />
                 </div>
-                <h1 className="text-4xl text-center font-thin text-green-500">
+                <h1 className="text-4xl text-center font-blond text-green-500">
                   Bienvenido
                 </h1>
                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -110,7 +112,13 @@ const Log = () => {
               </div>
             </div>
             <div className="hidden md:flex md:w-1/2 w-full">
-              <Image alt="test" src="cd.jpg" className="flex rounded-r-lg" />
+              <Image
+                alt="test"
+                width="400"
+                height="100"
+                src="/cd.jpg"
+                className="flex rounded-r-lg"
+              />
             </div>
           </div>
         </div>

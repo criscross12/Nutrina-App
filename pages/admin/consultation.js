@@ -460,7 +460,7 @@ const posts = () => {
             setStep(step + 1);
           }}
         >
-          <Image src={rightArrow} alt="description of image" />
+          <img src={rightArrow} alt="description of image" />
           Siguiente
         </button>
       )}
@@ -472,7 +472,7 @@ const posts = () => {
             setStep(step - 1);
           }}
         >
-          <Image src={leftArrow} alt="description of image" />
+          <img src={leftArrow} alt="description of image" />
           Atrás
         </button>
       )}
@@ -527,7 +527,7 @@ const posts = () => {
         <h2>
           {query.id ? "Seguimiento de paciente" : "Registro de Pacientes"}
         </h2>
-        <Image
+        <img
           src={query.id ? "../../nutrina1.png" : "../nutrina1.png"}
           alt="description of image"
           class="absolute right-0 top-0 w-22 h-24"

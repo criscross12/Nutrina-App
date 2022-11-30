@@ -105,9 +105,9 @@ const Patients = () => {
 
   return (
     <Layout title="Pacientes">
-      <Image
+      <img
         alt="test"
-        src="../nutrina1.png"
+        src="/nutrina1.png"
         class="absolute right-0 top-0 w-22 h-24"
       />
       <div className="text-center">
