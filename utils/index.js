@@ -52,6 +52,7 @@ export const datahelp = (data) => {
     c_contracted_arm: parseInt(data["c_contracted_arm"]),
     c_leg_max: parseInt(data["c_leg_max"]),
     c_mid_thigh: parseInt(data["c_mid_thigh"]),
+    cmb: parseInt(data["cmb"]),
   };
   const energy_distribution = {
     kcalCarboHydrates: parseInt(data["kcalCarboHydrates"]),
@@ -73,4 +74,18 @@ export const datahelp = (data) => {
     note,
   };
   return dataResponse;
+};
+
+export const createSpaceHelper = (data, value) => {
+  const TD = ({ dataPrint }) => (
+    <td className="border border-gray-400">{dataPrint}</td>
+  );
+  data.map((i) => {
+    createSpace.push(<TD data={i.value} />);
+  });
+  if (data.length < 6) {
+    for (let index = data.length; index < 6; index++) {
+      createSpace.push(<TD data="" />);
+    }
+  }
 };

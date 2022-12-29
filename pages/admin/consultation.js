@@ -382,6 +382,13 @@ const posts = () => {
           type="number"
           placeholder="##"
         />
+        <Input
+          name="cmb"
+          label="Circunferencia media de brazo:"
+          required
+          type="number"
+          placeholder="45 (cm)"
+        />
       </div>
     </section>
   );

@@ -32,7 +32,6 @@ export const getMedicalRes = async (uuid, type, token) => {
         }
       );
       const getData = await data.json();
-      console.log(getData);
       return getData;
     } catch (error) {
       console.log(error);
@@ -52,7 +51,6 @@ export const getMedicalRes = async (uuid, type, token) => {
         }
       );
       const getData = await data.json();
-      console.log(getData);
       return getData;
     } catch (error) {
       console.log(error);

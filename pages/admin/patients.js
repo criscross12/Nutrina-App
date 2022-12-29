@@ -16,7 +16,6 @@ import { useContext } from "react";
 import { DataContext } from "../../context/dataContext";
 import { isAuthenticated } from "../../utils/AuthService";
 import { NUTRINA_API } from "../../utils/config";
-import Image from "next/image";
 
 const Patients = () => {
   const { currentUser, setCurrentUser } = useContext(DataContext);

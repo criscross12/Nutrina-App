@@ -2,7 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function NavbarC({ children }) {
+export default function NavbarC() {
   const [navbar, setNavbar] = useState(false);
   return (
     <div>
@@ -91,7 +91,6 @@ export default function NavbarC({ children }) {
           </div>
         </div>
       </nav>
-      <div className="flex px-20 items-center mt-8">{children}</div>
     </div>
   );
 }
