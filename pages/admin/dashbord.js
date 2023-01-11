@@ -24,6 +24,19 @@ export default function Home() {
       <>
         <div className="flex flex-wrap">
           <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">
+            <h2 className="text-2xl font-normal leading-normal mt-0 mb-2 text-gray-900-">
+              Datos del mes
+            </h2>
+          </div>
+          <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">
+            <CardLineChart />
+          </div>
+          <div className="w-full xl:w-4/12 px-4">
+            <CardBarChart />
+          </div>
+        </div>
+        <div className="flex flex-wrap">
+          <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">
             <h2>Número de pacientes</h2>
           </div>
           <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">
@@ -32,17 +45,6 @@ export default function Home() {
           <div className="w-full xl:w-4/12 px-4">
             <CardBarChart />
           </div>
-          <div className="w-full xl:w-4/12 px-4">
-            <CardBarChart />
-          </div>
-        </div>
-        <div className="flex flex-wrap mt-4">
-          {/* <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">
-            <CardPageVisits />
-          </div> */}
-          {/* <div className="w-full xl:w-4/12 px-4">
-            <CardSocialTraffic />
-          </div> */}
         </div>
       </>
     </Layout>

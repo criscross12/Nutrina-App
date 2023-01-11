@@ -18,6 +18,23 @@ export const login = async (data) => {
   return resUser;
 };
 
+export const getPatientByUuid = async (uuid, token) => {
+  try {
+    const data = await fetch(NUTRINA_API.apiUsers + "/users/" + uuid, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
+    const getData = await data.json();
+    return getData;
+  } catch (error) {
+    console.log(error);
+  }
+  return getData;
+};
+
 export const getMedicalRes = async (uuid, type, token) => {
   if (type == "finalConsultation") {
     try {

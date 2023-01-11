@@ -1,37 +1,118 @@
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
-import { getMedicalRes } from "../utils/AuthService";
+import { getMedicalRes, getPatientByUuid } from "../utils/AuthService";
 
 export default function tableFinalConsultation({ data, access }) {
-  console.log("Datos: ", data, access);
   const [datas, setData] = useState([]);
+  const [patient, setPatient] = useState([]);
+  const getPatient = async () => {
+    const res = await getPatientByUuid(data["id"], access);
+    console.log("getPatient: ", res);
+    setPatient(res);
+  };
   const getData = async () => {
     const res = await getMedicalRes(data["id"], data["type"], access);
     setData(res);
   };
   useEffect(() => {
+    getPatient();
     getData();
   }, []);
 
+  let imgRef = "";
+  if (patient["sex"] == "M") {
+    imgRef = "/RefMas.png";
+  } else if (patient["sex"] == "F") {
+    imgRef = "/RefFem.png";
+  }
+
+  let datasex = "";
+  let dataGC = "";
+  let dataGV = "";
+  let dataIMC = "";
+  let dataICC = "";
+  if (patient["sex"] == "F" && patient["age"] >= 20 && patient["age"] <= 39) {
+    datasex = "Feminina 20-39 años";
+    dataGC = "% Grasa Corporal: 21 - 32.9";
+    dataGV = "Grasa Visceral: 1-9";
+    dataIMC = "IMC: 18.5-24.9";
+    dataICC = "ICC: <0.80";
+  } else if (
+    patient["sex"] == "F" &&
+    patient["age"] >= 40 &&
+    patient["age"] <= 59
+  ) {
+    datasex = "Feminina 40-59 años";
+    dataGC = "% Grasa Corporal: 23.0 - 33.9";
+    dataGV = "Grasa Visceral: 1-9";
+    dataIMC = "IMC: 18.5-24.9";
+    dataICC = "ICC: <0.80";
+  } else if (
+    patient["sex"] == "F" &&
+    patient["age"] >= 60 &&
+    patient["age"] <= 79
+  ) {
+    datasex = "Feminina 60-79 años";
+    dataGC = "% Grasa Corporal: 24.0 - 35.9";
+    dataGV = "Grasa Visceral: 1-9";
+    dataIMC = "IMC: 18.5-24.9";
+    dataICC = "ICC: <0.80";
+  } else if (
+    patient["sex"] == "M" &&
+    patient["age"] >= 20 &&
+    patient["age"] <= 39
+  ) {
+    datasex = "Masculino 20-39 años";
+    dataGC = "% Grasa Corporal: 8.0 - 19.9";
+    dataGV = "Grasa Visceral: 1-9";
+    dataIMC = "IMC: 33.3-39.9";
+    dataICC = "ICC: 0.78-0.93";
+  } else if (
+    patient["sex"] == "M" &&
+    patient["age"] >= 40 &&
+    patient["age"] <= 59
+  ) {
+    datasex = "Masculino 40-59 años";
+    dataGC = "% Grasa Corporal: 11.0 - 21.9";
+    dataGV = "Grasa Visceral: 1-9";
+    dataIMC = "IMC: 18.5-24.9";
+    dataICC = "ICC: 0.78-0.93";
+  }
+
   /** td field component */
   const TD = ({ data }) => <td className="border border-gray-400">{data}</td>;
-  let createSpace = [];
-  datas.map((i) => {
-    console.log(i);
-    createSpace.push(<TD data={i.note} />);
-  });
-  if (datas.length < 6) {
-    for (let index = datas.length; index < 6; index++) {
-      createSpace.push(<TD data="" />);
+  const dataPrint = (res) => {
+    let createSpace = [];
+    datas.map((i) => {
+      createSpace.push(<TD data={i[res]} />);
+    });
+    if (datas.length < 6) {
+      for (let index = datas.length; index < 6; index++) {
+        createSpace.push(<TD data="" />);
+      }
     }
-  }
+    return createSpace;
+  };
+
+  const dataPrintBM = (pos, res) => {
+    let createSpace = [];
+    datas.map((i) => {
+      createSpace.push(<TD data={i[pos][res]} />);
+    });
+    if (datas.length < 6) {
+      for (let index = datas.length; index < 6; index++) {
+        createSpace.push(<TD data="" />);
+      }
+    }
+    return createSpace;
+  };
 
   return (
     <table className="min-w-full">
       <tbody>
         <tr>
           <td width="20%" align="center" valign="middle">
-            <Image width="130" height="110" src="/nutrina1.png" />
+            <Image width="130" height="70" src="/Nutrina1.png" />
           </td>
           <td width="60%" align="center" valign="middle">
             <p>
@@ -40,7 +121,7 @@ export default function tableFinalConsultation({ data, access }) {
             <p>Cédula Profesional: 12490409 UAEMéx</p>
           </td>
           <td width="20%" align="center" valign="middle">
-            <Image width="130" height="110" src="/nutrina1.png" />
+            <Image width="150" height="150" src="/Logos.png" />
           </td>
         </tr>
         <tr>
@@ -48,7 +129,15 @@ export default function tableFinalConsultation({ data, access }) {
             &nbsp;
           </td>
           <td align="left" valign="middle">
-            Nombre del paciente:
+            Nombre del paciente:{" "}
+            <u>
+              {" "}
+              {patient["name"] +
+                " " +
+                patient["first_name"] +
+                " " +
+                patient["second_name"]}
+            </u>
           </td>
           <td align="center" valign="middle">
             &nbsp;
@@ -59,7 +148,7 @@ export default function tableFinalConsultation({ data, access }) {
             &nbsp;
           </td>
           <td align="left" valign="middle">
-            Edad:{" "}
+            Edad: {patient["age"]}
           </td>
           <td align="center" valign="middle">
             &nbsp;
@@ -80,153 +169,69 @@ export default function tableFinalConsultation({ data, access }) {
                 </tr>
                 <tr>
                   <td className="border border-gray-400">Fecha </td>
-                  {datas.map(({ created_at }) => (
-                    <>
-                      <td className="border border-gray-400">{created_at}</td>
-                    </>
-                  ))}
+                  {dataPrint("created_at")}
                 </tr>
                 <tr>
                   <td className="border border-gray-400">T/A mm Hg</td>
-                  <td className="border border-gray-400">&nbsp;</td>
-                  <td className="border border-gray-400">&nbsp;</td>
-                  <td className="border border-gray-400">&nbsp;</td>
-                  <td className="border border-gray-400">&nbsp;</td>
-                  <td className="border border-gray-400">&nbsp;</td>
-                  <td className="border border-gray-400">&nbsp;</td>
+                  {dataPrintBM("vital_signs", "blood_pressure")}
                 </tr>
                 <tr>
                   <td className="border border-gray-400">
                     Glucemia Capilar (mg/dl)
                   </td>
-                  <td className="border border-gray-400">&nbsp;</td>
-                  <td className="border border-gray-400">&nbsp;</td>
-                  <td className="border border-gray-400">&nbsp;</td>
-                  <td className="border border-gray-400">&nbsp;</td>
-                  <td className="border border-gray-400">&nbsp;</td>
-                  <td className="border border-gray-400">&nbsp;</td>
+                  {dataPrintBM("vital_signs", "capillary_glucose")}
                 </tr>
                 <tr>
                   <td className="border border-gray-400">Peso (kg)</td>
-                  {datas.map((b) => (
-                    <>
-                      <td className="border border-gray-400">
-                        {b.basic_measurements.weight}
-                      </td>
-                    </>
-                  ))}
+                  {dataPrintBM("basic_measurements", "weight")}
                 </tr>
                 <tr>
                   <td className="border border-gray-400">Estatura (cm)</td>
-                  {datas.map((b) => (
-                    <>
-                      <td className="border border-gray-400">
-                        {b.basic_measurements.height}
-                      </td>
-                    </>
-                  ))}
+                  {dataPrintBM("basic_measurements", "height")}
                 </tr>
                 <tr>
                   <td className="border border-gray-400">Cintura (cm)</td>
-                  {datas.map((b) => (
-                    <>
-                      <td className="border border-gray-400">
-                        {b.basic_measurements.waist}
-                      </td>
-                    </>
-                  ))}
+                  {dataPrintBM("basic_measurements", "waist")}
                 </tr>
                 <tr>
                   <td className="border border-gray-400">Cadera (cm)</td>
-                  {datas.map((b) => (
-                    <>
-                      <td className="border border-gray-400">
-                        {b.basic_measurements.hip}
-                      </td>
-                    </>
-                  ))}
+                  {dataPrintBM("basic_measurements", "hip")}
                 </tr>
                 <tr>
                   <td className="border border-gray-400">ICC</td>
-                  {datas.map((b) => (
-                    <>
-                      <td className="border border-gray-400">
-                        {b.basic_measurements.icc}
-                      </td>
-                    </>
-                  ))}
+                  {dataPrintBM("basic_measurements", "icc")}
                 </tr>
                 <tr>
                   <td className="border border-gray-400">% Grasa</td>
-                  {datas.map((b) => (
-                    <>
-                      <td className="border border-gray-400">
-                        {b.body_measurements.fat_percentage}
-                      </td>
-                    </>
-                  ))}{" "}
+                  {dataPrintBM("body_measurements", "fat_percentage")}
                 </tr>
                 <tr>
                   <td className="border border-gray-400">Kg Grasa</td>
-                  <td className="border border-gray-400">&nbsp;</td>
-                  <td className="border border-gray-400">&nbsp;</td>
-                  <td className="border border-gray-400">&nbsp;</td>
-                  <td className="border border-gray-400">&nbsp;</td>
-                  <td className="border border-gray-400">&nbsp;</td>
-                  <td className="border border-gray-400">&nbsp;</td>
+                  {dataPrintBM("body_measurements", "grasa_kg")}
                 </tr>
                 <tr>
                   <td className="border border-gray-400">Grasa visceral</td>
-                  {datas.map((b) => (
-                    <>
-                      <td className="border border-gray-400">
-                        {b.body_measurements.visceral_fat_percentage}
-                      </td>
-                    </>
-                  ))}{" "}
+                  {dataPrintBM("body_measurements", "visceral_fat_percentage")}
                 </tr>
                 <tr>
                   <td className="border border-gray-400">% Músculo</td>
-                  {datas.map((b) => (
-                    <>
-                      <td className="border border-gray-400">
-                        {b.body_measurements.muscle_mass_percentage}
-                      </td>
-                    </>
-                  ))}{" "}
+                  {dataPrintBM("body_measurements", "muscle_mass_percentage")}
                 </tr>
                 <tr>
                   <td className="border border-gray-400">Kg músculo</td>
-                  {createSpace}
+                  {dataPrintBM("body_measurements", "muscle_mass_kg")}
                 </tr>
                 <tr>
                   <td className="border border-gray-400">Edad corporal</td>
-                  {datas.map((b) => (
-                    <>
-                      <td className="border border-gray-400">
-                        {b.body_measurements.body_age}
-                      </td>
-                    </>
-                  ))}{" "}
+                  {dataPrintBM("body_measurements", "body_age")}
                 </tr>
                 <tr>
                   <td className="border border-gray-400">IMC</td>
-                  {datas.map((b) => (
-                    <>
-                      <td className="border border-gray-400">
-                        {b.basic_measurements.imc}
-                      </td>
-                    </>
-                  ))}
+                  {dataPrintBM("basic_measurements", "imc")}
                 </tr>
                 <tr>
                   <td className="border border-gray-400">CMB</td>
-                  <td className="border border-gray-400">&nbsp;</td>
-                  <td className="border border-gray-400">&nbsp;</td>
-                  <td className="border border-gray-400">&nbsp;</td>
-                  <td className="border border-gray-400">&nbsp;</td>
-                  <td className="border border-gray-400">&nbsp;</td>
-                  <td className="border border-gray-400">&nbsp;</td>
+                  {dataPrintBM("circumferences", "cmb")}
                 </tr>
               </tbody>
             </table>
@@ -237,19 +242,33 @@ export default function tableFinalConsultation({ data, access }) {
             <table width="50%" border={1}>
               <tbody>
                 <tr>
-                  <td>
+                  <td className="border border-gray-400">
                     {" "}
-                    <p>Parametros de referencia</p>
-                    <p>Femenina 20-39 años</p>
-                    <p>% Grasa Corporal: 21-39.9</p>
-                    <p>Grasa Visceral: 1- 9</p>
+                    <p>
+                      <strong>Parametros de referencia</strong>
+                    </p>
+                    <p>
+                      <small>{datasex}</small>
+                    </p>
+                    <p>
+                      <small>{dataGC}</small>
+                    </p>
+                    <p>
+                      <small>{dataGV}</small>
+                    </p>
+                    <p>
+                      <small>{dataIMC}</small>
+                    </p>
+                    <p>
+                      <small>{dataICC}</small>
+                    </p>
                   </td>
                 </tr>
               </tbody>
             </table>
           </td>
-          <td align="center" valign="middle">
-            IMG_REFERENCIA
+          <td align="center">
+            <Image src={imgRef} width="250" height="200" />
           </td>
         </tr>
       </tbody>

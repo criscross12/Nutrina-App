@@ -9,7 +9,6 @@ import { useRouter } from "next/router";
 import Swal from "sweetalert2";
 import { useAppContext } from "../../context/dataContext";
 import { NUTRINA_API } from "../../utils/config";
-import Image from "next/image";
 
 const posts = () => {
   const { currentUser, setCurrentUser } = useAppContext();
@@ -57,9 +56,8 @@ const posts = () => {
         showConfirmButton: true,
         timer: 1500,
       });
-      push(
-        "/admin/history/" + uuidConsultation.uuid + "?type=finalConsultation"
-      );
+      push("/admin/patients");
+      //push("/admin/history/" + uuidConsultation.uuid + "?type=history");
     } else {
       Swal.fire({
         icon: "error",
@@ -70,12 +68,13 @@ const posts = () => {
   };
 
   /** Input field component */
-  const Input = ({ name, label, required, type, placeholder }) => (
+  const Input = ({ name, label, required, step, type, placeholder }) => (
     <div>
       <legend>{label}</legend>
       <input
         name={name}
         {...register(name, { required })}
+        step={step}
         className={errors[label] && styles.inputInvalid}
         type={type}
         placeholder={placeholder}
@@ -167,28 +166,28 @@ const posts = () => {
         label="Peso:"
         required
         type="number"
-        placeholder="##"
+        placeholder="60kg"
       />
       <Input
         name="height"
         label="Estatura:"
         required
         type="number"
-        placeholder="##"
+        placeholder="160cm"
       />
       <Input
         name="waist"
         label="Cintura:"
         required
         type="number"
-        placeholder="##"
+        placeholder="45cm"
       />
       <Input
         name="hip"
         label="Cadera:"
         required
         type="number"
-        placeholder="##"
+        placeholder="55cm"
       />
     </section>
   );
@@ -250,8 +249,8 @@ const posts = () => {
         name="blood_pressure"
         label="Tensión arterial"
         required
-        type="number"
-        placeholder="##"
+        type="text"
+        placeholder="24/100"
       />
     </section>
   );
@@ -329,6 +328,7 @@ const posts = () => {
           name="D_bistyloid"
           label="D.Biestiloideo :"
           required
+          step="any"
           type="number"
           placeholder="##"
         />
@@ -336,6 +336,7 @@ const posts = () => {
           name="D_humerus"
           label="D.Húmero:"
           required
+          step="any"
           type="number"
           placeholder="##"
         />
@@ -343,6 +344,7 @@ const posts = () => {
           name="D_femur"
           label="D.Fémur:"
           required
+          step="any"
           type="number"
           placeholder="##"
         />
@@ -511,8 +513,6 @@ const posts = () => {
       <PlyometricFields />,
       <CircumferencesFields />,
       <BoneDiametersFields />,
-      <DistributionFields />,
-      <NotesFields />,
     ];
   } else {
     fieldGroups = [
@@ -523,8 +523,6 @@ const posts = () => {
       <PlyometricFields />,
       <CircumferencesFields />,
       <BoneDiametersFields />,
-      <DistributionFields />,
-      <NotesFields />,
     ];
   }
 
