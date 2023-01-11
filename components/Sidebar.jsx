@@ -2,7 +2,7 @@ import classNames from "classnames";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState, useMemo, useContext, useEffect } from "react";
-import { AiOutlineLogout } from "react-icons/ai";
+import { AiOutlineLogout, AiFillDashboard } from "react-icons/ai";
 import { FaLeaf } from "react-icons/fa";
 import { DataContext } from "../context/dataContext";
 import { isAuthenticated, logOut } from "../utils/AuthService";
@@ -23,7 +23,7 @@ const menuItems = [
   { id: 1, label: "Paciente", icon: UsersIcon, link: "/admin/patients" },
   { id: 2, label: "Agenda", icon: CalendarIcon, link: "/admin/diary" },
   // { id: 3, label: "Reportes", icon: Report, link: "/admin/users" },
-  { id: 4, label: "Dashbord", icon: Dashbord, link: "/admin/dashbord" },
+  { id: 4, label: "Dashbord", icon: CalendarIcon, link: "/admin/dashbord" },
   { id: 5, label: "Perfil", icon: LogoutIcon, link: "/admin/profile" },
   // { id: 5, label: "Ayuda", icon: HelpIcon, link: "/" },
 ];

@@ -19,14 +19,14 @@ const Log = () => {
       if (user["roles"] == "super_admin") {
         setCookie("user", user["token"], {
           path: "/",
-          maxAge: 3600, // Expires after 1hr
+          maxAge: 3600 * 2, // Expires after 1hr
           sameSite: true,
         });
         push("/admin/dashbord");
       } else if (user["roles"] == "patient") {
         setCookie("user", user["token"], {
           path: "/",
-          maxAge: 3600, // Expires after 1hr
+          maxAge: 3600 * 2, // Expires after 1hr
           sameSite: true,
         });
         push("/patients/welcome");

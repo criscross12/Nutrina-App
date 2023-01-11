@@ -16,48 +16,48 @@ export const datahelp = (data) => {
   };
 
   const basic_measurements = {
-    weight: parseInt(data["weight"]),
-    height: parseInt(data["height"]),
-    waist: parseInt(data["waist"]),
-    hip: parseInt(data["hip"]),
+    weight: parseFloat(data["weight"]),
+    height: parseFloat(data["height"]),
+    waist: parseFloat(data["waist"]),
+    hip: parseFloat(data["hip"]),
   };
   const body_measurements = {
-    fat_percentage: parseInt(data["fat_percentage"]),
-    visceral_fat_percentage: parseInt(data["visceral_fat_percentage"]),
-    muscle_mass_percentage: parseInt(data["muscle_mass_percentage"]),
-    body_age: parseInt(data["body_age"]),
+    fat_percentage: parseFloat(data["fat_percentage"]),
+    visceral_fat_percentage: parseFloat(data["visceral_fat_percentage"]),
+    muscle_mass_percentage: parseFloat(data["muscle_mass_percentage"]),
+    body_age: parseFloat(data["body_age"]),
   };
   const vital_signs = {
-    capillary_glucose: parseInt(data["capillary_glucose"]),
-    heart_rate: parseInt(data["heart_rate"]),
-    blood_pressure: parseInt(data["blood_pressure"]),
+    capillary_glucose: parseFloat(data["capillary_glucose"]),
+    heart_rate: parseFloat(data["heart_rate"]),
+    blood_pressure: data["blood_pressure"],
   };
   const plyometric_measurements = {
-    pl_triceps: parseInt(data["pl_triceps"]),
-    pl_subscapular: parseInt(data["pl_subscapular"]),
-    pl_biceps: parseInt(data["pl_biceps"]),
-    pl_iliac_crest: parseInt(data["pl_iliac_crest"]),
-    pl_supraspinal: parseInt(data["pl_supraspinal"]),
-    pl_abdominal: parseInt(data["pl_abdominal"]),
-    pl_thigh: parseInt(data["pl_thigh"]),
-    pl_leg: parseInt(data["pl_leg"]),
+    pl_triceps: parseFloat(data["pl_triceps"]),
+    pl_subscapular: parseFloat(data["pl_subscapular"]),
+    pl_biceps: parseFloat(data["pl_biceps"]),
+    pl_iliac_crest: parseFloat(data["pl_iliac_crest"]),
+    pl_supraspinal: parseFloat(data["pl_supraspinal"]),
+    pl_abdominal: parseFloat(data["pl_abdominal"]),
+    pl_thigh: parseFloat(data["pl_thigh"]),
+    pl_leg: parseFloat(data["pl_leg"]),
   };
   const bone_diameters = {
-    D_bistyloid: parseInt(data["D_bistyloid"]),
-    D_humerus: parseInt(data["D_humerus"]),
-    D_femur: parseInt(data["D_femur"]),
+    D_bistyloid: parseFloat(data["D_bistyloid"]),
+    D_humerus: parseFloat(data["D_humerus"]),
+    D_femur: parseFloat(data["D_femur"]),
   };
   const circumferences = {
-    c_relaxed_arm: parseInt(data["c_relaxed_arm"]),
-    c_contracted_arm: parseInt(data["c_contracted_arm"]),
-    c_leg_max: parseInt(data["c_leg_max"]),
-    c_mid_thigh: parseInt(data["c_mid_thigh"]),
-    cmb: parseInt(data["cmb"]),
+    c_relaxed_arm: parseFloat(data["c_relaxed_arm"]),
+    c_contracted_arm: parseFloat(data["c_contracted_arm"]),
+    c_leg_max: parseFloat(data["c_leg_max"]),
+    c_mid_thigh: parseFloat(data["c_mid_thigh"]),
+    cmb: parseFloat(data["cmb"]),
   };
   const energy_distribution = {
-    kcalCarboHydrates: parseInt(data["kcalCarboHydrates"]),
-    kcalLipids: parseInt(data["kcalLipids"]),
-    kcalProteins: parseInt(data["kcalProteins"]),
+    kcalCarboHydrates: parseFloat(data["kcalCarboHydrates"]),
+    kcalLipids: parseFloat(data["kcalLipids"]),
+    kcalProteins: parseFloat(data["kcalProteins"]),
   };
 
   const dataResponse = {
@@ -74,18 +74,4 @@ export const datahelp = (data) => {
     note,
   };
   return dataResponse;
-};
-
-export const createSpaceHelper = (data, value) => {
-  const TD = ({ dataPrint }) => (
-    <td className="border border-gray-400">{dataPrint}</td>
-  );
-  data.map((i) => {
-    createSpace.push(<TD data={i.value} />);
-  });
-  if (data.length < 6) {
-    for (let index = data.length; index < 6; index++) {
-      createSpace.push(<TD data="" />);
-    }
-  }
 };
