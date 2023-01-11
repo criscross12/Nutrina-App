@@ -28,7 +28,7 @@ export default function footer() {
             &copy; Nutriña • 2022 Todos los derechos reservados
           </p>
           <Link href={"/"}>
-            <p className="text-black text-center">Terminos y Condiciones</p>
+            <p className="text-black text-center">Términos y Condiciones</p>
           </Link>
         </div>
       </div>

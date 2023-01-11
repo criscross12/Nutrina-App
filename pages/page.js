@@ -1,5 +1,4 @@
 import Format from "../Layout/format";
-import Image from "next/image";
 
 export default function Page() {
   return (
@@ -13,7 +12,7 @@ export default function Page() {
             <div className="block sm:flex md:block lg:flex items-center justify-center">
               <div className="mt-8 sm:m-8 md:m-0 md:mt-8 lg:m-8 text-center">
                 <span className="block text-sm text-gray-600 mt-2">
-                  <Image alt="test" src="me.png" />
+                  <img alt="test" src="me.png"/>
                 </span>
               </div>
             </div>

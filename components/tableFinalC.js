@@ -142,6 +142,7 @@ export default function tableFinalConsultation({ data, access }) {
           <td align="center" valign="middle">
             &nbsp;
           </td>
+          <div class="linea"></div>
         </tr>
         <tr>
           <td align="center" valign="middle">
